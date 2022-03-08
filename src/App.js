@@ -24,7 +24,6 @@ function App() {
   return (
     <RecipesProvider>
       <BrowserRouter>
-        <span className="logo">TRYBE</span>
         <Switch>
           <Route
             exact
