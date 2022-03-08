@@ -6,6 +6,7 @@ import { fetchIgredient,
   fetchCocktailIgredient,
   fetchCocktailName,
   fetchCocktailFirstLetter } from '../services/fetchApi';
+import Card from './Card';
 // { useState }
 function SearchBar(props) {
   const [searchInput, setSearchInput] = useState('');
@@ -23,13 +24,38 @@ function SearchBar(props) {
   const handleClick = () => {
     if (history.location.pathname === '/explore/foods') {
       if (searchInput === 'Ingredient') {
-        fetchIgredient(nameSearch).then((response) => console.log(response));
+        fetchIgredient(nameSearch).then((response) => {
+          console.log(response.meals.length);
+          if (response.meals.length === 0) {
+            global.alert('Sorry, we haven\'t found any recipes for these filters.');
+          }
+          if (response.meals.length === 1) {
+            history.push(`/foods/${response.meals.idMeal}`);
+          }
+          if (response.meals.length > 1) {
+            response.map((meals, index) => (
+              <Card key={ meals.idMeal } index={ index } dataMeals={ meals } />
+            ));
+          }
+        });
       }
       if (searchInput === 'Name') {
         fetchName(nameSearch).then((response) => console.log(response));
       }
       if (searchInput === 'FirstLetter') {
-        fetchFirstLetter(nameSearch).then((response) => console.log(response))
+        fetchFirstLetter(nameSearch).then((response) => {
+          if (response.meals.length === 0) {
+            global.alert('Sorry, we haven\'t found any recipes for these filters.');
+          }
+          if (response.meals.length === 1) {
+            history.push(`/foods/${response.meals.idMeal}`);
+          }
+          if (response.meals.length > 1) {
+            response.meals.map((meals, index) => (
+              <Card key={ meals.idMeal } index={ index } dataMeals={ meals } />
+            ));
+          }
+        })
           .catch((err) => global.alert(err));
       }
     }
@@ -50,7 +76,6 @@ function SearchBar(props) {
   return (
 
     <div>
-      {console.log(history.location)}
       <input
         type="text"
         onChange={ handleNameSearch }

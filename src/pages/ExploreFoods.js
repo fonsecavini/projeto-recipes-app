@@ -7,7 +7,6 @@ function ExploreFoods(props) {
 
   return (
     <div>
-      {console.log(history)}
 
       <SearchBar history={ history } />
       <p>ExploreFoods</p>
