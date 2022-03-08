@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { fetchIgredient, fetchName, fetchFirstLetter } from '../services/fetchApi';
+import propTypes from 'prop-types';
+import { fetchIgredient,
+  fetchName,
+  fetchFirstLetter,
+  fetchCocktailIgredient,
+  fetchCocktailName,
+  fetchCocktailFirstLetter } from '../services/fetchApi';
 // { useState }
-function SearchBar() {
+function SearchBar(props) {
   const [searchInput, setSearchInput] = useState('');
   const [nameSearch, setNameSearch] = useState('');
+  const { history } = props;
 
   const handleSearch = ({ target: { value } }) => {
     setSearchInput(value);
@@ -14,21 +21,36 @@ function SearchBar() {
   };
 
   const handleClick = () => {
-    if (searchInput === 'Ingredient') {
-      fetchIgredient(nameSearch).then((response) => console.log(response));
+    if (history.location.pathname === '/explore/foods') {
+      if (searchInput === 'Ingredient') {
+        fetchIgredient(nameSearch).then((response) => console.log(response));
+      }
+      if (searchInput === 'Name') {
+        fetchName(nameSearch).then((response) => console.log(response));
+      }
+      if (searchInput === 'FirstLetter') {
+        fetchFirstLetter(nameSearch).then((response) => console.log(response))
+          .catch((err) => global.alert(err));
+      }
     }
-    if (searchInput === 'Name') {
-      fetchName(nameSearch).then((response) => console.log(response));
-    }
-    if (searchInput === 'FirstLetter') {
-      fetchFirstLetter(nameSearch).then((response) => console.log(response))
-        .catch((err) => global.alert(err));
+    if (history.location.pathname === '/explore/drinks') {
+      if (searchInput === 'Ingredient') {
+        fetchCocktailIgredient(nameSearch).then((response) => console.log(response));
+      }
+      if (searchInput === 'Name') {
+        fetchCocktailName(nameSearch).then((response) => console.log(response));
+      }
+      if (searchInput === 'FirstLetter') {
+        fetchCocktailFirstLetter(nameSearch).then((response) => console.log(response))
+          .catch((err) => global.alert(err));
+      }
     }
   };
 
   return (
 
     <div>
+      {console.log(history.location)}
       <input
         type="text"
         onChange={ handleNameSearch }
@@ -91,5 +113,9 @@ function SearchBar() {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  history: propTypes.func.isRequired,
+};
 
 export default SearchBar;
