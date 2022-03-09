@@ -1,6 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import SearchBar from '../components/SearchBar';
+import Header from '../components/Header';
+import Footer from '../components/BottomMenu';
 
 function ExploreDrinks(props) {
   const { history } = props;
@@ -11,6 +13,8 @@ function ExploreDrinks(props) {
 
       <SearchBar history={ history } />
       <p>ExploreDrinks</p>
+      <Header title="Explore Drinks" />
+      <Footer />
     </div>
   );
 }
