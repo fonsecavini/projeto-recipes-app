@@ -1,25 +1,25 @@
-import React from 'react';
-import propTypes from 'prop-types';
-import SearchBar from '../components/SearchBar';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/BottomMenu';
+import RecipesContext from '../context/RecipesContext';
 
-function ExploreDrinks(props) {
-  const { history } = props;
+function ExploreDrinks() {
+  const {
+    setSearchEnable,
+  } = useContext(RecipesContext);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/explore/drinks') setSearchEnable(false);
+  });
   return (
     <div>
-      {console.log(history)}
-
-      <SearchBar history={ history } />
-      <p>ExploreDrinks</p>
       <Header title="Explore Drinks" />
       <Footer />
     </div>
   );
 }
 
-ExploreDrinks.propTypes = {
-  history: propTypes.func.isRequired,
-};
 export default ExploreDrinks;

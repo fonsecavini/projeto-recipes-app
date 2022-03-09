@@ -105,10 +105,8 @@ function App() {
             path="/favorite-recipes"
             component={ FavoritesRecipes }
           />
-
         </Switch>
       </BrowserRouter>
-
     </RecipesProvider>
   );
 }

@@ -17,7 +17,8 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  meals: propTypes.objectOf.isRequired,
+  dataMeals: propTypes.func.isRequired,
+  index: propTypes.number.isRequired,
 };
 
 export default Card;

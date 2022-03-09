@@ -8,6 +8,7 @@ export const fetchCategory = async (category) => {
 };
 
 export const fetchIgredient = async (ingredient) => {
+  console.log('chamou');
   const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const response = result.json();
   return response;
