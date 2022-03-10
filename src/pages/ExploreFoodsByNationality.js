@@ -5,7 +5,7 @@ import Footer from '../components/BottomMenu';
 function ExploreFoodsByNationality() {
   return (
     <div>
-      <Header title="Explore Foods by Nationality" />
+      <Header title="Explore Nationalities" />
       <Footer />
     </div>
   );

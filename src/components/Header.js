@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import SearchIcon from '../images/searchIcon.svg';
 import ProfileIcon from '../images/profileIcon.svg';
 import RecipesContext from '../context/RecipesContext';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   // const [searchEnable, setSearchEnable] = useState(true);
@@ -53,24 +54,16 @@ function Header(props) {
       {
         searchEnable
         && (
-          <button
-            type="button"
+          <input
+            type="image"
             alt="searchicon"
+            src={ SearchIcon }
+            data-testid="search-top-btn"
             onClick={ () => setEnableSearchBar(!enableSearchBar) }
-          >
-            <img
-              data-testid="search-top-btn"
-              src={ SearchIcon }
-              alt="Search"
-            />
-          </button>
+          />
         )
       }
-      { enableSearchBar && <input
-        data-testid="search-input"
-        type="text"
-        placeholder="Procure uma receita"
-      />}
+      { enableSearchBar && <SearchBar />}
     </div>
   );
 }
