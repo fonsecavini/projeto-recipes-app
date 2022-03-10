@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import { fetchDrinkDetails } from '../services/fetchApi';
+import recipesContext from '../context/RecipesContext';
 
 function DrinkCard(props) {
   const { dataDrinks, index, strDrinkThumb } = props;
+  const { setRecipesDetails } = useContext(recipesContext);
+
+  const handleclick = ({ id }) => {
+    fetchDrinkDetails(id).then((response) => {
+      setRecipesDetails(response);
+    });
+  };
+
   return (
     <div data-testid={ `${index}-recipe-card` }>
-      <h5 data-testid={ `${index}-card-name` }>
+      <Link
+        to={ `/drinks/${dataDrinks.idDrink}` }
+        data-testid={ `${index}-card-name` }
+        onClick={ handleclick }
+      >
         {dataDrinks.strDrink}
-      </h5>
+      </Link>
       <img
         width="100px"
         data-testid={ `${index}-card-img` }

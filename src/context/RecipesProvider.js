@@ -9,8 +9,9 @@ function RecipesProvider({ children }) {
   const [redirect, setRedirect] = useState(false);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
+  const [recipesDetails, setRecipesDetails] = useState([]);
 
-  console.log(drinkCategories);
+  // console.log(drinkCategories);
   const contextValue = {
     searchEnable,
     setSearchEnable,
@@ -24,6 +25,8 @@ function RecipesProvider({ children }) {
     setDrinkCategories,
     foodCategories,
     setFoodCategories,
+    recipesDetails,
+    setRecipesDetails,
   };
 
   return (

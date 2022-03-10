@@ -13,7 +13,7 @@ function DrinkList() {
     fetchRecommendationsDrinks().then((response) => setDrinksMount(response.drinks));
   }
 
-  console.log(drinksMount);
+  // console.log(drinksMount);
 
   function handleRedirect() {
     if (recipes && recipes.length === 1) {
