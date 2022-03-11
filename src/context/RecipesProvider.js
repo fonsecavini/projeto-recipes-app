@@ -9,9 +9,22 @@ function RecipesProvider({ children }) {
   const [redirect, setRedirect] = useState(false);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
+  const [recipesDetails, setRecipesDetails] = useState([]);
+  const [favorite, setFavorite] = useState(false);
+  const [mealsByCategory, setMealsByCategory] = useState([]);
+  const [mealsMount, setMealsMount] = useState([]);
+  const [drinksMount, setDrinksMount] = useState([]);
+  const [drinksByCategory, setDrinksByCategory] = useState([]);
+  const [toggle, setToggle] = useState(true);
+  const [recomendationMount, setRecomendationMount] = useState([]);
+  console.log(toggle);
 
-  console.log(drinkCategories);
+  // console.log(drinkCategories);
   const contextValue = {
+    recomendationMount,
+    setRecomendationMount,
+    favorite,
+    setFavorite,
     searchEnable,
     setSearchEnable,
     enableSearchBar,
@@ -24,6 +37,18 @@ function RecipesProvider({ children }) {
     setDrinkCategories,
     foodCategories,
     setFoodCategories,
+    recipesDetails,
+    setRecipesDetails,
+    mealsByCategory,
+    setMealsByCategory,
+    mealsMount,
+    setMealsMount,
+    drinksMount,
+    setDrinksMount,
+    drinksByCategory,
+    setDrinksByCategory,
+    toggle,
+    setToggle,
   };
 
   return (

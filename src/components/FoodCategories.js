@@ -1,18 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 import recipesContext from '../context/RecipesContext';
-import { fetchListCategoryMeal } from '../services/fetchApi';
+import { fetchListCategoryMeal, fetchMealByCategory } from '../services/fetchApi';
 
 function FoodCategories() {
-  const { foodCategories, setFoodCategories } = useContext(recipesContext);
+  const { foodCategories,
+    setFoodCategories,
+    setMealsByCategory,
+    setMealsMount,
+    setToggle } = useContext(recipesContext);
   const FIVE = 5;
 
   function handleFoodCategory() {
     fetchListCategoryMeal().then((response) => setFoodCategories(response.meals));
   }
 
+  function handleClickButton(category) {
+    fetchMealByCategory(category).then((response) => setMealsByCategory(response.meals));
+    setMealsMount('');
+    setToggle((prevState) => !prevState);
+  }
+
   useEffect(() => {
     handleFoodCategory();
-  });
+  }, []);
 
   return (
     <div>
@@ -21,6 +31,8 @@ function FoodCategories() {
           key={ strCategory }
           type="button"
           data-testid={ `${strCategory}-category-filter` }
+          value={ strCategory }
+          onClick={ (e) => handleClickButton(e.target.value) }
         >
           { strCategory }
         </button>

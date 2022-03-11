@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import { fetchRecommendationsMeals } from '../services/fetchApi';
 import FoodCard from './FoodCard';
 
 function FoodList() {
-  const { recipes, setRedirect, redirect } = useContext(recipesContext);
-  const [mealsMount, setMealsMount] = useState([]);
-  const TWELVE = 12;
+  const { recipes,
+    setRedirect,
+    redirect,
+    mealsMount,
+    setMealsMount,
+    mealsByCategory,
+    toggle } = useContext(recipesContext);
 
-  function handleMeals() {
-    fetchRecommendationsMeals().then((response) => setMealsMount(response.meals));
-  }
+  const TWELVE = 12;
 
   function handleRedirect() {
     if (recipes && recipes.length === 1) {
@@ -19,9 +21,15 @@ function FoodList() {
     }
   }
 
+  function handleMeals() {
+    fetchRecommendationsMeals().then((response) => setMealsMount(response.meals));
+  }
+
   useEffect(() => {
-    handleMeals();
-  }, []);
+    if (toggle === true) {
+      handleMeals();
+    }
+  }, [toggle]);
 
   useEffect(() => {
     handleRedirect();
@@ -38,6 +46,7 @@ function FoodList() {
           index={ index }
           dataMeals={ meals }
           strMealThumb={ meals.strMealThumb }
+          dataTestid={ `${index}-recipe-card` }
         />
       ))}
       { recipes.length === 0
@@ -48,8 +57,18 @@ function FoodList() {
             index={ index }
             dataMeals={ meal }
             strMealThumb={ meal.strMealThumb }
+            dataTestid={ `${index}-recipe-card` }
           />
         ))}
+      { mealsByCategory && mealsByCategory.slice(0, TWELVE).map((food, index) => (
+        <FoodCard
+          key={ food.idMeal }
+          index={ index }
+          dataMeals={ food }
+          strMealThumb={ food.strMealThumb }
+          dataTestid={ `${index}-recipe-card` }
+        />
+      ))}
       { redirect && <Redirect to={ `/foods/${recipes[0].idMeal}` } />}
     </div>
   );

@@ -1,8 +1,14 @@
 const DRINK_ALC_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
 const DRINK_NO_ALC_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic';
 
-export const fetchCategory = async (category) => {
+export const fetchMealByCategory = async (category) => {
   const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  const response = result.json();
+  return response;
+};
+
+export const fetchDrinksByCategory = async (category) => {
+  const result = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
   const response = result.json();
   return response;
 };
