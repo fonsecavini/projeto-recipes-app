@@ -46,7 +46,7 @@ function FoodList() {
           index={ index }
           dataMeals={ meals }
           strMealThumb={ meals.strMealThumb }
-          dataTestid={ `${index}-card-name` }
+          dataTestid={ `${index}-recipe-card` }
         />
       ))}
       { recipes.length === 0
@@ -57,7 +57,7 @@ function FoodList() {
             index={ index }
             dataMeals={ meal }
             strMealThumb={ meal.strMealThumb }
-            dataTestid={ `${index}-card-name` }
+            dataTestid={ `${index}-recipe-card` }
           />
         ))}
       { mealsByCategory && mealsByCategory.slice(0, TWELVE).map((food, index) => (
@@ -66,7 +66,7 @@ function FoodList() {
           index={ index }
           dataMeals={ food }
           strMealThumb={ food.strMealThumb }
-          dataTestid={ `${index}-card-name` }
+          dataTestid={ `${index}-recipe-card` }
         />
       ))}
       { redirect && <Redirect to={ `/foods/${recipes[0].idMeal}` } />}

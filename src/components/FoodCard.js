@@ -20,6 +20,7 @@ function FoodCard(props) {
       <Link
         onClick={ () => handleClick(dataMeals.idMeal) }
         to={ `/foods/${dataMeals.idMeal}` }
+        data-testid={ `${index}-card-name` }
       >
         {dataMeals.strMeal}
       </Link>

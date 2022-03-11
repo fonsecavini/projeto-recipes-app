@@ -46,7 +46,7 @@ function DrinkList() {
           index={ index }
           dataDrinks={ drinks }
           strDrinkThumb={ drinks.strDrinkThumb }
-          dataTestid={ `${index}-card-name` }
+          dataTestid={ `${index}-recipe-card` }
         />
       ))}
       { recipes.length === 0
@@ -57,7 +57,7 @@ function DrinkList() {
             index={ index }
             dataDrinks={ drink }
             strDrinkThumb={ drink.strDrinkThumb }
-            dataTestid={ `${index}-card-name` }
+            dataTestid={ `${index}-recipe-card` }
           />
         ))}
       { drinksByCategory && drinksByCategory.slice(0, TWELVE).map((cocktail, index) => (
@@ -66,7 +66,7 @@ function DrinkList() {
           index={ index }
           dataDrinks={ cocktail }
           strDrinkThumb={ cocktail.strDrinkThumb }
-          dataTestid={ `${index}-card-name` }
+          dataTestid={ `${index}-recipe-card` }
         />
       ))}
       { redirect && <Redirect to={ `/drinks/${recipes[0].idDrink}` } />}
