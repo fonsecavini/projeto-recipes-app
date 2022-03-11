@@ -6,11 +6,14 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function Detail() {
   const { recipesDetails, favorite, setFavorite } = useContext(recipesContext);
+  // const SETE = 7;
+  // const VINTE_SETE = 27;
   // const keys = recipesDetails.map((ingredientes) => Object
   // .keys(ingredientes));
   // const includeIngredient = keys.includes('strIngredient1');
 
-  // const teste = recipesDetails.filter((title) => title === 'strMealThumb');
+  const teste = recipesDetails.includes('strIngredient');
+  console.log(teste);
 
   const handleFavorite = () => {
     setFavorite(!favorite);
@@ -72,27 +75,38 @@ function Detail() {
             <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>
             {/* {lista dos ingredientes */}
             <ul>
-              {/* {
-                recipesDetails[0].filter((ingredientes) => Object.keys(ingredientes)
-                  .includes('strIngredient'))
-                  .map((e) => (
-                    <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
-                  ))
-              } */}
+              {
+                Object
+                  .keys(recipesDetails[0])
+                  .filter((key) => key.includes('strIngredient'))
+                  .map((e, index) => {
+                    if (recipesDetails[0][e].length > 0) {
+                      return (
+                        <li
+                          key={ e }
+                          data-testid={ `${index}-${e}` }
+                        >
+                          { recipesDetails[0][e]}
+                        </li>
+                      );
+                    }
+                    return '';
+                  })
+
+                // filter((ingredientes) => Object.keys(ingredientes)
+                //   .includes('strIngredient'))
+                //   .map((e) => (
+                //     <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
+                //   ))
+              }
 
             </ul>
 
             {/* {texto de instruçoes da receita} */}
-            {/* <ul>
-              {
-                recipesDetails[0].filter((instruçoes) => Object.keys(instruçoes)
-                  .includes('strMeasure'))
-                  .map((e) => (
-                    <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
-                  ))
-              }
+            <p>
+              { recipesDetails[0].strInstructions}
+            </p>
 
-            </ul> */}
             {/* video da receita */}
 
             {/* card de receitas */}
