@@ -5,21 +5,21 @@ import { fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 
 function DrinkCard(props) {
-  const { dataDrinks, index, strDrinkThumb } = props;
+  const { dataDrinks, index, strDrinkThumb, dataTestid } = props;
   const { setRecipesDetails } = useContext(recipesContext);
 
-  const handleclick = ({ id }) => {
+  const handleClick = async (id) => {
     fetchDrinkDetails(id).then((response) => {
-      setRecipesDetails(response);
+      setRecipesDetails(response.drinks);
     });
   };
 
   return (
-    <div data-testid={ `${index}-recipe-card` }>
+    <div data-testid={ dataTestid }>
       <Link
+        onClick={ () => handleClick(dataDrinks.idDrink) }
         to={ `/drinks/${dataDrinks.idDrink}` }
-        data-testid={ `${index}-card-name` }
-        onClick={ handleclick }
+        data-testid={ dataTestid }
       >
         {dataDrinks.strDrink}
       </Link>
@@ -38,6 +38,7 @@ DrinkCard.propTypes = {
   index: propTypes.number.isRequired,
   strDrinkThumb: propTypes.string.isRequired,
   strDrink: propTypes.string.isRequired,
+  dataTestid: propTypes.string.isRequired,
 };
 
 export default DrinkCard;
