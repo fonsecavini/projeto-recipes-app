@@ -6,21 +6,21 @@ import recipesContext from '../context/RecipesContext';
 
 function FoodCard(props) {
   const { dataMeals, index, strMealThumb } = props;
-  const { setRecipesDetails } = useContext(recipesContext);
+  const { recipesDetails, setRecipesDetails } = useContext(recipesContext);
 
-  const handleClick = (id) => {
+  const handleClick = async (id) => {
     fetchMealsDetails(id).then((response) => {
-      setRecipesDetails(response);
-      console.log(response);
+      setRecipesDetails(response.meals);
     });
+    console.log(recipesDetails);
   };
 
   return (
     <div data-testid={ `${index}-recipe-card` }>
       <Link
+        onClick={ () => handleClick(dataMeals.idMeal) }
         to={ `/foods/${dataMeals.idMeal}` }
         data-testid={ `${index}-card-name` }
-        onClick={ () => handleClick(dataMeals.idMeal) }
       >
         {dataMeals.strMeal}
       </Link>

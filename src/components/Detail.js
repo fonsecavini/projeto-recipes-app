@@ -1,83 +1,106 @@
 import React, { useContext } from 'react';
+import recipesContext from '../context/RecipesContext';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function Detail() {
-  const { recipesDetails: {
-    strMealThumb,
-    strCategory,
-    strMeal,
-    strIngredient1,
-    strIngredient2,
-    strIngredient3,
-    strIngredient4,
-    strIngredient5,
-    strIngredient6,
-    strIngredient7,
-    strIngredient8,
-    strIngredient9,
-    strIngredient10,
-    strIngredient11,
-    strIngredient12,
-    strIngredient13,
-    strIngredient14,
-    strIngredient15,
-    strIngredient16,
-    strIngredient17,
-    strIngredient18,
-    strIngredient19,
-    strIngredient20,
-    strMeasure1,
-    strMeasure2,
-    strMeasure3,
-    strMeasure4,
-    strMeasure5,
-    strMeasure6,
-    strMeasure7,
-    strMeasure8,
-    strMeasure9,
-    strMeasure10,
-    strMeasure11,
-    strMeasure12,
-    strMeasure13,
-    strMeasure14,
-    strMeasure15,
-    strMeasure16,
-    strMeasure17,
-    strMeasure18,
-    strMeasure19,
-    strMeasure20,
-    strYoutube,
+  const { recipesDetails, favorite, setFavorite } = useContext(recipesContext);
+  // const keys = recipesDetails.map((ingredientes) => Object
+  // .keys(ingredientes));
+  // const includeIngredient = keys.includes('strIngredient1');
 
-  } } = useContext(recipesContext);
+  // const teste = recipesDetails.filter((title) => title === 'strMealThumb');
+
+  const handleFavorite = () => {
+    setFavorite(!favorite);
+  };
+
   return (
     <div>
-      {/* imagem da receita */}
-      <img data-testid="recipe-photo" src={ strMealThumb } />
-      {/* titulo da receita */}
-      <h1 data-testid="recipe-title">{strMeal}</h1>
-      {/* botao de compartilhar */}
-      <button type="button" data-testid="share-btn" />
-      {/* botao de favoritar       */}
-      <button type="button" data-testid="favorite-btn" />
-      {/* texto da categoria */}
-      <p data-testid="recipe-category">{strCategory}</p>
-      {/* lista dos ingredientes */}
-      <ul>
-        {
-          recipesDetails.filter((ingredientes) => ingredientes.includes('strMeasure'))
-            .map((e) => (
-              <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
-            ))
-        }
 
-      </ul>
-      {/* texto de instruçoes da receita */}
-      <p data-testid="instructions" />
-      {/* video da receita */}
+      {
+        recipesDetails.length > 0 && (
+          <div>
+            {/* {console.log('teste', teste)} */}
+            {console.log('recipeDetails', recipesDetails)}
+            {console.log('strMeal = titulo', recipesDetails[0].strMeal)}
+            {/* imagem da receita */}
+            <img
+              data-testid="recipe-photo"
+              src={ recipesDetails[0].strMealThumb }
+              alt="recipe"
+            />
+            {/* titulo da receita  */}
+            <h1 data-testid="recipe-title">
+              {recipesDetails[0].strMeal}
 
-      {/* card de receitas */}
+            </h1>
+            {/* botao de compartilhar */}
+            <button
+              type="button"
+              data-testid="share-btn"
+            >
+              <img src={ shareIcon } alt="share" />
+            </button>
 
-      {/* botao de inicio da receita */}
-      <button data-testid="start-recipe-btn" />
+            {/* botao de favoritar       */}
+            {
+              favorite
+                ? (
+                  <button
+                    type="button"
+                    data-testid="favorite-btn"
+                    onClick={ handleFavorite }
+                  >
+                    <img src={ blackHeartIcon } alt="black heart" />
+                  </button>
+
+                )
+                : (
+                  <button
+                    type="button"
+                    data-testid="favorite-btn"
+                    onClick={ handleFavorite }
+                  >
+                    <img src={ whiteHeartIcon } alt="white heart" />
+                  </button>
+                )
+            }
+
+            {/* texto da categoria */}
+            <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>
+            {/* {lista dos ingredientes */}
+            <ul>
+              {/* {
+                recipesDetails[0].filter((ingredientes) => Object.keys(ingredientes)
+                  .includes('strIngredient'))
+                  .map((e) => (
+                    <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
+                  ))
+              } */}
+
+            </ul>
+
+            {/* {texto de instruçoes da receita} */}
+            {/* <ul>
+              {
+                recipesDetails[0].filter((instruçoes) => Object.keys(instruçoes)
+                  .includes('strMeasure'))
+                  .map((e) => (
+                    <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
+                  ))
+              }
+
+            </ul> */}
+            {/* video da receita */}
+
+            {/* card de receitas */}
+
+            {/* botao de inicio da receita */}
+            <button type="button" data-testid="start-recipe-btn">Start recipe</button>
+          </div>)
+      }
     </div>
   );
 }

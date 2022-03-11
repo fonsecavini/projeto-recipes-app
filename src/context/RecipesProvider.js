@@ -10,9 +10,12 @@ function RecipesProvider({ children }) {
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [recipesDetails, setRecipesDetails] = useState([]);
+  const [favorite, setFavorite] = useState(false);
 
   // console.log(drinkCategories);
   const contextValue = {
+    favorite,
+    setFavorite,
     searchEnable,
     setSearchEnable,
     enableSearchBar,
