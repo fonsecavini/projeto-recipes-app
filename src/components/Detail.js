@@ -33,12 +33,12 @@ function Detail() {
   useEffect(() => {
     const fetchDetails = async () => {
       if (location.pathname.includes('foods')) {
-        getMealsRecomendations();
+        getDrinksRecomendations();
         fetchMealsDetails(location.pathname.split('/')[2]).then((response) => {
           setRecipesDetails(response.meals);
         });
       } else {
-        getDrinksRecomendations();
+        getMealsRecomendations();
         fetchDrinkDetails(location.pathname.split('/')[2]).then((response) => {
           setRecipesDetails(response.drinks);
         });
