@@ -16,21 +16,21 @@ function FoodCard(props) {
   };
 
   return (
-    <div data-testid={ dataTestid }>
-      <Link
-        onClick={ () => handleClick(dataMeals.idMeal) }
-        to={ `/foods/${dataMeals.idMeal}` }
-        data-testid={ `${index}-card-name` }
-      >
+    <Link
+      onClick={ () => handleClick(dataMeals.idMeal) }
+      to={ `/foods/${dataMeals.idMeal}` }
+      data-testid={ `${index}-card-name` }
+    >
+      <div data-testid={ dataTestid }>
         {dataMeals.strMeal}
-      </Link>
-      <img
-        data-testid={ `${index}-card-img` }
-        src={ strMealThumb }
-        alt="Meal"
-        width="100px"
-      />
-    </div>
+        <img
+          data-testid={ `${index}-card-img` }
+          src={ strMealThumb }
+          alt="Meal"
+          width="100px"
+        />
+      </div>
+    </Link>
   );
 }
 

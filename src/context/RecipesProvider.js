@@ -19,7 +19,6 @@ function RecipesProvider({ children }) {
   const [recomendationMount, setRecomendationMount] = useState([]);
   console.log(toggle);
 
-  // console.log(drinkCategories);
   const contextValue = {
     recomendationMount,
     setRecomendationMount,
