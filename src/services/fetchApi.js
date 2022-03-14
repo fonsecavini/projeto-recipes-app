@@ -103,3 +103,9 @@ export const fetchDrinksNoAlcoholic = async () => {
   const response = result.json();
   return response;
 };
+
+export const fetchIngredientsDrinks = async () => {
+  const result = await fetch('www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const response = result.json();
+  return response;
+};

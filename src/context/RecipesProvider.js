@@ -19,6 +19,8 @@ function RecipesProvider({ children }) {
   const [recomendationMount, setRecomendationMount] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [ingredient, setingredient] = useState([]);
+  const [started, setStarted] = useState([]);
+
   // console.log(toggle);
   console.log(toggle);
 
@@ -55,6 +57,8 @@ function RecipesProvider({ children }) {
     setMeasure,
     ingredient,
     setingredient,
+    started,
+    setStarted,
   };
 
   return (

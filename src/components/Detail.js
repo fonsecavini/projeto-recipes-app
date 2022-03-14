@@ -14,11 +14,13 @@ import {
 } from '../services/fetchApi';
 import Player from './Player';
 import IngredientsList from './IngredientsList';
+import '../css/details.css';
 
 function Detail() {
   const {
     recipesDetails, favorite, setFavorite, setRecipesDetails, setRecomendationMount,
     recomendationMount,
+    // started, setStarted,
   } = useContext(recipesContext);
   const location = useLocation();
   const SIX = 6;
@@ -130,38 +132,40 @@ function Detail() {
               url={ recipesDetails[0].strYoutube }
             />
             {/* card de receitas */}
-            <div className="cardRecomnendation">
-
-              { recomendationMount.slice(0, SIX).map((card, index) => {
-                if (location.pathname.includes('foods')) {
-                  return (
-                    <div key={ card.idDrink }>
+            <div className="cardsRecomendation">
+              <div className="cards-box">
+                { recomendationMount.slice(0, SIX).map((card, index) => {
+                  if (location.pathname.includes('foods')) {
+                    return (
                       <DrinkCard
+                        key={ card.idDrink }
                         dataTestid={ `${index}-recomendation-card` }
                         index={ index }
                         dataDrinks={ card }
                         strDrinkThumb={ card.strDrinkThumb }
-                      />
-                    </div>);
-                } return (
-                  <div key={ card.idMeal }>
+                      />);
+                  } return (
                     <FoodCard
+                      key={ card.idMeal }
                       dataTestid={ `${index}-recomendation-card` }
                       index={ index }
                       dataMeals={ card }
                       strMealThumb={ card.strMealThumb }
                     />
-                  </div>);
-              })}
+                  );
+                })}
+              </div>
             </div>
             {/* botao de inicio da receita */}
-            <button
-              className="StartRecipe"
-              type="button"
-              data-testid="start-recipe-btn"
-            >
-              Start recipe
-            </button>
+            {
+              <button
+                className="StartRecipe"
+                type="button"
+                data-testid="start-recipe-btn"
+              >
+                Start recipe
+              </button>
+            }
           </div>)
       }
     </div>

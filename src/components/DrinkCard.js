@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function DrinkCard(props) {
   const { dataDrinks, index, strDrinkThumb, dataTestid } = props;
@@ -17,17 +18,20 @@ function DrinkCard(props) {
   return (
     <Link
       onClick={ () => handleClick(dataDrinks.idDrink) }
+      className="cards"
       to={ `/drinks/${dataDrinks.idDrink}` }
       data-testid={ `${index}-card-name` }
     >
-      <div data-testid={ dataTestid }>
-        {dataDrinks.strDrink}
-        <img
-          width="100px"
-          data-testid={ `${index}-card-img` }
-          src={ strDrinkThumb }
-          alt="Meal"
-        />
+      <div data-testid={ `${index}-recomendation-title` }>
+        <div data-testid={ dataTestid }>
+          {dataDrinks.strDrink}
+          <img
+            width="100px"
+            data-testid={ `${index}-card-img` }
+            src={ strDrinkThumb }
+            alt="Meal"
+          />
+        </div>
       </div>
     </Link>
   );
