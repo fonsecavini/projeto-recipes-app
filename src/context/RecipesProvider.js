@@ -20,8 +20,8 @@ function RecipesProvider({ children }) {
   const [measure, setMeasure] = useState([]);
   const [ingredient, setingredient] = useState([]);
   // console.log(toggle);
+  console.log(toggle);
 
-  // console.log(drinkCategories);
   const contextValue = {
     recomendationMount,
     setRecomendationMount,
@@ -55,7 +55,6 @@ function RecipesProvider({ children }) {
     setMeasure,
     ingredient,
     setingredient,
-
   };
 
   return (

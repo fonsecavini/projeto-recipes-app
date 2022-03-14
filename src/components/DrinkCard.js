@@ -15,21 +15,21 @@ function DrinkCard(props) {
   };
 
   return (
-    <div data-testid={ dataTestid }>
-      <Link
-        onClick={ () => handleClick(dataDrinks.idDrink) }
-        to={ `/drinks/${dataDrinks.idDrink}` }
-        data-testid={ `${index}-card-name` }
-      >
+    <Link
+      onClick={ () => handleClick(dataDrinks.idDrink) }
+      to={ `/drinks/${dataDrinks.idDrink}` }
+      data-testid={ `${index}-card-name` }
+    >
+      <div data-testid={ dataTestid }>
         {dataDrinks.strDrink}
-      </Link>
-      <img
-        width="100px"
-        data-testid={ `${index}-card-img` }
-        src={ strDrinkThumb }
-        alt="Meal"
-      />
-    </div>
+        <img
+          width="100px"
+          data-testid={ `${index}-card-img` }
+          src={ strDrinkThumb }
+          alt="Meal"
+        />
+      </div>
+    </Link>
   );
 }
 

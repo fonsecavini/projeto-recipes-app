@@ -3,8 +3,8 @@ import propTypes from 'prop-types';
 
 function Login(props) {
   const [disable, setDisable] = useState(true);
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const { history } = props;
 
   useEffect(() => {

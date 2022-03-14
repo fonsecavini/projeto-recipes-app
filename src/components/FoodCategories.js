@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import recipesContext from '../context/RecipesContext';
 import { fetchListCategoryMeal, fetchMealByCategory } from '../services/fetchApi';
 
@@ -8,6 +8,7 @@ function FoodCategories() {
     setMealsByCategory,
     setMealsMount,
     setToggle } = useContext(recipesContext);
+  const [foodCategorySelected, setFoodCategorySelected] = useState('');
   const FIVE = 5;
 
   function handleFoodCategory() {
@@ -15,14 +16,23 @@ function FoodCategories() {
   }
 
   function handleClickButton(category) {
+    setFoodCategorySelected(category);
     fetchMealByCategory(category).then((response) => setMealsByCategory(response.meals));
     setMealsMount('');
-    setToggle((prevState) => !prevState);
+    setToggle(false);
+    if (foodCategorySelected === category) {
+      setToggle((prevState) => !prevState);
+    }
   }
 
   useEffect(() => {
     handleFoodCategory();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function handleButtonAll() {
+    setToggle(true);
+  }
 
   return (
     <div>
@@ -37,6 +47,14 @@ function FoodCategories() {
           { strCategory }
         </button>
       )) }
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        value="All"
+        onClick={ () => handleButtonAll() }
+      >
+        All
+      </button>
     </div>
   );
 }
