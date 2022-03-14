@@ -135,23 +135,23 @@ function Detail() {
               { recomendationMount.slice(0, SIX).map((card, index) => {
                 if (location.pathname.includes('foods')) {
                   return (
-                    <div>
+                    <div key={ card.idDrink }>
                       <DrinkCard
                         dataTestid={ `${index}-recomendation-card` }
-                        key={ card.idDrink }
                         index={ index }
                         dataDrinks={ card }
                         strDrinkThumb={ card.strDrinkThumb }
                       />
                     </div>);
                 } return (
-                  <FoodCard
-                    dataTestid={ `${index}-recomendation-card` }
-                    key={ card.idMeal }
-                    index={ index }
-                    dataMeals={ card }
-                    strMealThumb={ card.strMealThumb }
-                  />);
+                  <div key={ card.idMeal }>
+                    <FoodCard
+                      dataTestid={ `${index}-recomendation-card` }
+                      index={ index }
+                      dataMeals={ card }
+                      strMealThumb={ card.strMealThumb }
+                    />
+                  </div>);
               })}
             </div>
             {/* botao de inicio da receita */}
