@@ -14,7 +14,7 @@ function Player(props) {
     },
   };
   const urlId = getYouTubeID(url);
-  console.log(urlId);
+  // console.log(urlId);
   const onReady = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();

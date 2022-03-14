@@ -18,7 +18,12 @@ function Detail() {
   const {
     recipesDetails, favorite, setFavorite, setRecipesDetails, setRecomendationMount,
     recomendationMount,
+    measure,
+    setMeasure,
+    setingredient,
+    ingredient,
   } = useContext(recipesContext);
+  // const [measure, setMeasure] = useState([]);
   const location = useLocation();
   const SIX = 6;
   function getDrinksRecomendations() {
@@ -72,13 +77,31 @@ function Detail() {
   // const keys = recipesDetails.map((ingredientes) => Object
   // .keys(ingredientes));
   // const includeIngredient = keys.includes('strIngredient1');
-  console.log(location.pathname.split('/')[2]);
+  // console.log(location.pathname.split('/')[2]);
   // const teste = recipesDetails.includes('strIngredient');
   // console.log(teste);
 
   const handleFavorite = () => {
     setFavorite(!favorite);
   };
+
+  const getMeasureAndIngridient = () => {
+    if (recipesDetails.length > 0) {
+      const measures = Object.keys(recipesDetails[0])
+        .filter((key) => key.includes('strMeasure'))
+        .map((e) => (recipesDetails[0][e]));
+      setMeasure(measures);
+
+      const ingridients = Object.keys(recipesDetails[0])
+        .filter((key) => key.includes('strIngredient'))
+        .map((e) => (recipesDetails[0][e]));
+      setingredient(ingridients);
+    }
+  };
+
+  useEffect(() => {
+    getMeasureAndIngridient();
+  }, [recipesDetails]);
 
   return (
     <div>
@@ -133,25 +156,29 @@ function Detail() {
             <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>
             {/* {lista dos ingredientes */}
             <ul>
-              {
-                Object
+              {/* {Object
                   .keys(recipesDetails[0])
-                  .filter((key) => key.includes('strIngredient'))
-                  .map((e, index) => {
-                    if (recipesDetails[0][e] === null || recipesDetails[0][e] === '') {
-                      return '';
-                    }
-                    return (
-                      <li
-                        key={ e }
-                        data-testid={
-                          `${index}-ingredient-name-and-measure`
-                        }
-                      >
-                        { recipesDetails[0][e]}
-                      </li>
-                    );
-                  })
+                  .filter((key) => key.includes('strMeasure'))} */}
+              {
+                // Object
+                //   .keys(recipesDetails[0])
+                //   .filter((key) => key.includes('strIngredient'))
+                measure.map((e, index) => {
+                  if (measure[e] === null || recipesDetails[0][e] === '') {
+                    return '';
+                  }
+                  return (
+                    <li
+                      key={ e }
+                      data-testid={
+                        `${index}-ingredient-name-and-measure`
+                      }
+                    >
+                      {/* { recipesDetails[0][e]} */}
+                      { `${ingredient[index]}-${e}`}
+                    </li>
+                  );
+                })
 
                 // filter((ingredientes) => Object.keys(ingredientes)
                 //   .includes('strIngredient'))
