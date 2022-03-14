@@ -12,6 +12,7 @@ import {
   fetchRecommendationsDrinks,
   fetchRecommendationsMeals,
 } from '../services/fetchApi';
+import Player from './Player';
 
 function Detail() {
   const {
@@ -167,13 +168,10 @@ function Detail() {
             </p>
 
             {/* video da receita */}
-            {
-              <iframe
-                data-testid="video"
-                title=" drinks"
-                src={ recipesDetails[0].strVideo }
-              />
-            }
+            {/* fonte: https://www.youtube.com/watch?v=ckiaNqOrG5U&t=19s */}
+            <Player
+              url={ recipesDetails[0].strYoutube }
+            />
             {/* card de receitas */}
             { recomendationMount.slice(0, SIX).map((card, index) => {
               if (location.pathname.includes('drinks')) {
