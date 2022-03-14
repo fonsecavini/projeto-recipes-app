@@ -1,13 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import propTypes from 'prop-types';
+import { useLocation, useHistory } from 'react-router-dom';
 
 function ExploreSearch() {
   const location = useLocation();
-  const { history } = props;
+  const history = useHistory();
 
   const handleClick = ({ target }) => {
-    console.log(target.value);
     const Ingredients = 'By Ingredient';
     if (target.value === Ingredients && location.pathname === '/explore/foods') {
       history.push('/explore/foods/ingredients');
@@ -51,9 +49,5 @@ function ExploreSearch() {
     </div>
   );
 }
-
-ExploreSearch.propTypes = {
-  history: propTypes.func.isRequired,
-};
 
 export default ExploreSearch;

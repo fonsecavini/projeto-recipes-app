@@ -13,17 +13,13 @@ import {
   fetchRecommendationsMeals,
 } from '../services/fetchApi';
 import Player from './Player';
+import IngredientsList from './IngredientsList';
 
 function Detail() {
   const {
     recipesDetails, favorite, setFavorite, setRecipesDetails, setRecomendationMount,
     recomendationMount,
-    measure,
-    setMeasure,
-    setingredient,
-    ingredient,
   } = useContext(recipesContext);
-  // const [measure, setMeasure] = useState([]);
   const location = useLocation();
   const SIX = 6;
   function getDrinksRecomendations() {
@@ -49,18 +45,6 @@ function Detail() {
           setRecipesDetails(response.drinks);
         });
       }
-
-      // fetchMealsDetails(location.pathname.split('/')[2]).then((response) => {
-      //   if (location.pathname.includes('foods')) {
-      //     setRecipesDetails(response.meals);
-      //   } else {
-      //     setRecipesDetails(response.drinks);
-      //   }
-      //   // const teste = location.pathname.includes('foods')
-      //   //   ? setRecipesDetails(response.meals)
-      //   //   : setRecipesDetails(response.drinks);
-      //   // console.log(teste);
-      // });
     };
 
     fetchDetails();
@@ -72,36 +56,10 @@ function Detail() {
   const image = location.pathname.includes('foods')
     ? 'strMealThumb'
     : 'strDrinkThumb';
-  // const SETE = 7;
-  // const VINTE_SETE = 27;
-  // const keys = recipesDetails.map((ingredientes) => Object
-  // .keys(ingredientes));
-  // const includeIngredient = keys.includes('strIngredient1');
-  // console.log(location.pathname.split('/')[2]);
-  // const teste = recipesDetails.includes('strIngredient');
-  // console.log(teste);
 
   const handleFavorite = () => {
     setFavorite(!favorite);
   };
-
-  const getMeasureAndIngridient = () => {
-    if (recipesDetails.length > 0) {
-      const measures = Object.keys(recipesDetails[0])
-        .filter((key) => key.includes('strMeasure'))
-        .map((e) => (recipesDetails[0][e]));
-      setMeasure(measures);
-
-      const ingridients = Object.keys(recipesDetails[0])
-        .filter((key) => key.includes('strIngredient'))
-        .map((e) => (recipesDetails[0][e]));
-      setingredient(ingridients);
-    }
-  };
-
-  useEffect(() => {
-    getMeasureAndIngridient();
-  }, [recipesDetails]);
 
   return (
     <div>
@@ -159,40 +117,7 @@ function Detail() {
             { location.pathname.includes('drinks')
             && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
 
-            {/* {lista dos ingredientes */}
-            <ul>
-              {/* {Object
-                  .keys(recipesDetails[0])
-                  .filter((key) => key.includes('strMeasure'))} */}
-              {
-                // Object
-                //   .keys(recipesDetails[0])
-                //   .filter((key) => key.includes('strIngredient'))
-                measure.map((e, index) => {
-                  if (measure[e] === null || recipesDetails[0][e] === '') {
-                    return '';
-                  }
-                  return (
-                    <li
-                      key={ e }
-                      data-testid={
-                        `${index}-ingredient-name-and-measure`
-                      }
-                    >
-                      {/* { recipesDetails[0][e]} */}
-                      { `${ingredient[index]}-${e}`}
-                    </li>
-                  );
-                })
-
-                // filter((ingredientes) => Object.keys(ingredientes)
-                //   .includes('strIngredient'))
-                //   .map((e) => (
-                //     <li key={ idMeal } data-testid={ `${index}-${e}` }>{e}</li>
-                //   ))
-              }
-
-            </ul>
+            {<IngredientsList />}
 
             {/* {texto de instruçoes da receita} */}
             <p data-testid="instructions">
@@ -205,26 +130,38 @@ function Detail() {
               url={ recipesDetails[0].strYoutube }
             />
             {/* card de receitas */}
-            { recomendationMount.slice(0, SIX).map((card, index) => {
-              if (location.pathname.includes('foods')) {
-                return (<DrinkCard
-                  dataTestid={ `${index}-recomendation-card` }
-                  key={ card.idDrink }
-                  index={ index }
-                  dataDrinks={ card }
-                  strDrinkThumb={ card.strDrinkThumb }
-                />);
-              }
-              return (<FoodCard
-                dataTestid={ `${index}-recomendation-card` }
-                key={ card.idMeal }
-                index={ index }
-                dataMeals={ card }
-                strMealThumb={ card.strMealThumb }
-              />);
-            })}
+            <div className="cardRecomnendation">
+
+              { recomendationMount.slice(0, SIX).map((card, index) => {
+                if (location.pathname.includes('foods')) {
+                  return (
+                    <div>
+                      <DrinkCard
+                        dataTestid={ `${index}-recomendation-card` }
+                        key={ card.idDrink }
+                        index={ index }
+                        dataDrinks={ card }
+                        strDrinkThumb={ card.strDrinkThumb }
+                      />
+                    </div>);
+                } return (
+                  <FoodCard
+                    dataTestid={ `${index}-recomendation-card` }
+                    key={ card.idMeal }
+                    index={ index }
+                    dataMeals={ card }
+                    strMealThumb={ card.strMealThumb }
+                  />);
+              })}
+            </div>
             {/* botao de inicio da receita */}
-            <button type="button" data-testid="start-recipe-btn">Start recipe</button>
+            <button
+              className="StartRecipe"
+              type="button"
+              data-testid="start-recipe-btn"
+            >
+              Start recipe
+            </button>
           </div>)
       }
     </div>
