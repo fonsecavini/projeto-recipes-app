@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import propTypes from 'prop-types';
+import RecipesContext from '../context/RecipesContext';
 
 function Login(props) {
+  const { email, setEmail } = useContext(RecipesContext);
   const [disable, setDisable] = useState(true);
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { history } = props;
 
