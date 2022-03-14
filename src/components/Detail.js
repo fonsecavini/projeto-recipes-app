@@ -39,12 +39,12 @@ function Detail() {
   useEffect(() => {
     const fetchDetails = async () => {
       if (location.pathname.includes('foods')) {
-        getMealsRecomendations();
+        getDrinksRecomendations();
         fetchMealsDetails(location.pathname.split('/')[2]).then((response) => {
           setRecipesDetails(response.meals);
         });
       } else {
-        getDrinksRecomendations();
+        getMealsRecomendations();
         fetchDrinkDetails(location.pathname.split('/')[2]).then((response) => {
           setRecipesDetails(response.drinks);
         });
@@ -105,7 +105,7 @@ function Detail() {
 
   return (
     <div>
-
+      {console.log(recipesDetails)}
       {
         recipesDetails.length > 0 && (
           <div>
@@ -153,7 +153,12 @@ function Detail() {
             }
 
             {/* texto da categoria */}
-            <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>
+            { location.pathname.includes('foods')
+            && <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>}
+
+            { location.pathname.includes('drinks')
+            && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
+
             {/* {lista dos ingredientes */}
             <ul>
               {/* {Object
@@ -201,7 +206,7 @@ function Detail() {
             />
             {/* card de receitas */}
             { recomendationMount.slice(0, SIX).map((card, index) => {
-              if (location.pathname.includes('drinks')) {
+              if (location.pathname.includes('foods')) {
                 return (<DrinkCard
                   dataTestid={ `${index}-recomendation-card` }
                   key={ card.idDrink }
