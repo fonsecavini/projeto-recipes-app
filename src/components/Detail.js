@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import DrinkCard from './DrinkCard';
-import FoodCard from './FoodCard';
+import { useLocation, useHistory } from 'react-router-dom';
+import { getName, setName } from '../services/RecipesLocalStorage';
+import Card from './Card';
+import DetailInfo from './DetailInfo';
 import recipesContext from '../context/RecipesContext';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
   fetchMealsDetails,
   fetchDrinkDetails,
@@ -18,12 +16,13 @@ import '../css/details.css';
 
 function Detail() {
   const {
-    recipesDetails, favorite, setFavorite, setRecipesDetails, setRecomendationMount,
-    recomendationMount,
-    // started, setStarted,
+    recipesDetails, setRecipesDetails, setRecomendationMount,
+    started,
+    setStarted,
   } = useContext(recipesContext);
   const location = useLocation();
-  const SIX = 6;
+  const history = useHistory();
+
   function getDrinksRecomendations() {
     fetchRecommendationsDrinks()
       .then((response) => setRecomendationMount(response.drinks));
@@ -52,109 +51,45 @@ function Detail() {
     fetchDetails();
   }, []);
 
-  const title = location.pathname.includes('foods')
-    ? 'strMeal'
-    : 'strDrink';
-  const image = location.pathname.includes('foods')
-    ? 'strMealThumb'
-    : 'strDrinkThumb';
+  const handleClick = () => {
+    const recipesInProg = getName('inProgressRecipes')
+      ? getName('inProgressRecipes')
+      : ({
+        cocktail: {},
+        meals: {} });
 
-  const handleFavorite = () => {
-    setFavorite(!favorite);
+    if (recipesDetails.length > 0) {
+      const ingridients = Object.keys(recipesDetails[0])
+        .filter((key) => key.includes('strIngredient'))
+        .map((e) => (recipesDetails[0][e]));
+
+      setStarted(true);
+      if (location.pathname.includes('foods')) {
+        recipesInProg.meals[recipesDetails[0].idMeal] = ingridients;
+        console.log(recipesInProg);
+        setName('inProgressRecipes', recipesInProg);
+        history.push(`/foods/${recipesDetails[0].idMeal}/in-progress`);
+      } else {
+        recipesInProg.cocktail[recipesDetails[0].idDrink] = ingridients;
+        setName('inProgressRecipes', recipesInProg);
+        history.push(`/drinks/${recipesDetails[0].idDrink}/in-progress`);
+      }
+    }
   };
 
   return (
     <div>
-      {console.log(recipesDetails)}
       {
         recipesDetails.length > 0 && (
           <div>
-            {/* imagem da receita */}
-            <img
-              data-testid="recipe-photo"
-              src={ recipesDetails[0][image] }
-              alt="recipe"
-            />
-            {/* titulo da receita  */}
-            <h1 data-testid="recipe-title">
-              {recipesDetails[0][title] }
-
-            </h1>
-            {/* botao de compartilhar */}
-            <button
-              type="button"
-              data-testid="share-btn"
-            >
-              <img src={ shareIcon } alt="share" />
-            </button>
-
-            {/* botao de favoritar       */}
-            {
-              favorite
-                ? (
-                  <button
-                    type="button"
-                    data-testid="favorite-btn"
-                    onClick={ handleFavorite }
-                  >
-                    <img src={ blackHeartIcon } alt="black heart" />
-                  </button>
-
-                )
-                : (
-                  <button
-                    type="button"
-                    data-testid="favorite-btn"
-                    onClick={ handleFavorite }
-                  >
-                    <img src={ whiteHeartIcon } alt="white heart" />
-                  </button>
-                )
-            }
-
-            {/* texto da categoria */}
-            { location.pathname.includes('foods')
-            && <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>}
-
-            { location.pathname.includes('drinks')
-            && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
-
-            {<IngredientsList />}
-
-            {/* {texto de instruçoes da receita} */}
-            <p data-testid="instructions">
-              { recipesDetails[0].strInstructions}
-            </p>
-
-            {/* video da receita */}
-            {/* fonte: https://www.youtube.com/watch?v=ckiaNqOrG5U&t=19s */}
+            <DetailInfo />
+            <IngredientsList />
             <Player
               url={ recipesDetails[0].strYoutube }
             />
             {/* card de receitas */}
             <div className="cardsRecomendation">
-              <div className="cards-box">
-                { recomendationMount.slice(0, SIX).map((card, index) => {
-                  if (location.pathname.includes('foods')) {
-                    return (
-                      <DrinkCard
-                        key={ card.idDrink }
-                        dataTestid={ `${index}-recomendation-card` }
-                        index={ index }
-                        dataDrinks={ card }
-                        strDrinkThumb={ card.strDrinkThumb }
-                      />);
-                  } return (
-                    <FoodCard
-                      key={ card.idMeal }
-                      dataTestid={ `${index}-recomendation-card` }
-                      index={ index }
-                      dataMeals={ card }
-                      strMealThumb={ card.strMealThumb }
-                    />
-                  );
-                })}
-              </div>
+              <Card />
             </div>
             {/* botao de inicio da receita */}
             {
@@ -162,8 +97,14 @@ function Detail() {
                 className="StartRecipe"
                 type="button"
                 data-testid="start-recipe-btn"
+                onClick={ handleClick }
               >
-                Start recipe
+                {
+                  started
+                    ? ('Continue Recipe')
+                    : ('Start recipe')
+                }
+
               </button>
             }
           </div>)

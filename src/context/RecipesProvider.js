@@ -19,10 +19,11 @@ function RecipesProvider({ children }) {
   const [recomendationMount, setRecomendationMount] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [ingredient, setingredient] = useState([]);
-  const [started, setStarted] = useState([]);
+  const [started, setStarted] = useState(false);
+  const [recipesInProgress, setRecipesInProgress] = useState([]);
+  const [searchByIngredient, setSearchByIngredient] = useState('');
 
   // console.log(toggle);
-  console.log(toggle);
 
   const contextValue = {
     recomendationMount,
@@ -59,6 +60,10 @@ function RecipesProvider({ children }) {
     setingredient,
     started,
     setStarted,
+    recipesInProgress,
+    setRecipesInProgress,
+    searchByIngredient,
+    setSearchByIngredient,
   };
 
   return (

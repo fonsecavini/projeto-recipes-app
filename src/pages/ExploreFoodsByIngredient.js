@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/BottomMenu';
 import RecipesContext from '../context/RecipesContext';
+import ExploreByIngredients from '../components/ExploreByIngredients';
 
 function ExploreFoodsByIngredients() {
   const {
@@ -17,6 +18,7 @@ function ExploreFoodsByIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" />
+      <ExploreByIngredients />
       <Footer />
     </div>
   );

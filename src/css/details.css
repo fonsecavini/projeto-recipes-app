@@ -16,10 +16,10 @@
   display: flex;
   overflow: hidden;
   overflow-x: scroll;
-  width: 180px;
+  width: 360px;
 }
 
 .cards {
   left: 10px;
-  width: 50%;
+  width: 180px;
 }

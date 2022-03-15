@@ -26,7 +26,6 @@ function DrinkCard(props) {
         <div data-testid={ dataTestid }>
           {dataDrinks.strDrink}
           <img
-            width="100px"
             data-testid={ `${index}-card-img` }
             src={ strDrinkThumb }
             alt="Meal"
