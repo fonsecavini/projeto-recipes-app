@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { fetchSurpriseMeal, fetchSurpriseDrink } from '../services/fetchApi';
+import recipesContext from '../context/RecipesContext';
 
 function ExploreSearch() {
   const location = useLocation();
   const history = useHistory();
+  const locationMeals = '/explore/foods';
+  const {
+    setSurpriseDrink,
+    setSurpriseMeal,
+  } = useContext(recipesContext);
+
+  const handleSurprise = async () => {
+    if (location.pathname === locationMeals) {
+      const responseMeals = await fetchSurpriseMeal();
+      setSurpriseMeal(responseMeals.meals);
+      history.push(`/foods/${responseMeals.meals[0].idMeal}`);
+    }
+    if (location.pathname === '/explore/drinks') {
+      const responseDrink = await fetchSurpriseDrink();
+      setSurpriseDrink(responseDrink.drinks);
+      history.push(`/drinks/${responseDrink.drinks[0].idDrink}`);
+    }
+  };
 
   const handleClick = ({ target }) => {
     const Ingredients = 'By Ingredient';
-    if (target.value === Ingredients && location.pathname === '/explore/foods') {
+    if (target.value === Ingredients && location.pathname === locationMeals) {
       history.push('/explore/foods/ingredients');
     }
     if (target.value === Ingredients && location.pathname === '/explore/drinks') {
@@ -40,7 +60,7 @@ function ExploreSearch() {
       )}
       <button
         type="button"
-        onClick={ handleClick }
+        onClick={ handleSurprise }
         data-testid="explore-surprise"
         value="Surprise me!"
       >

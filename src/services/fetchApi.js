@@ -115,3 +115,33 @@ export const fetchIngredientsMeals = async () => {
   const response = result.json();
   return response;
 };
+
+export const fetchSurpriseMeal = async () => {
+  const result = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+  const response = result.json();
+  return response;
+};
+
+export const fetchSurpriseDrink = async () => {
+  const result = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const response = result.json();
+  return response;
+};
+
+export const fetchByNationalities = async () => {
+  const result = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const response = result.json();
+  return response;
+};
+
+export const fetchRecipesByArea = async (Area) => {
+  const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Area}`);
+  const response = result.json();
+  return response;
+};
+
+export const fetchRecipesAll = async () => {
+  const result = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=');
+  const response = result.json();
+  return response;
+};

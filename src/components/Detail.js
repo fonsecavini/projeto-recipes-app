@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import { getName, setName } from '../services/RecipesLocalStorage';
+import { useLocation } from 'react-router-dom';
+import { getName } from '../services/RecipesLocalStorage';
 import Card from './Card';
 import DetailInfo from './DetailInfo';
 import recipesContext from '../context/RecipesContext';
@@ -13,15 +13,20 @@ import {
 import Player from './Player';
 import IngredientsList from './IngredientsList';
 import '../css/details.css';
+import RecipesStatus from './RecipeStatus';
+
+const recipesInProg = getName('inProgressRecipes')
+  ? getName('inProgressRecipes')
+  : ({
+    cocktail: {},
+    meals: {} });
 
 function Detail() {
   const {
     recipesDetails, setRecipesDetails, setRecomendationMount,
-    started,
     setStarted,
   } = useContext(recipesContext);
   const location = useLocation();
-  const history = useHistory();
 
   function getDrinksRecomendations() {
     fetchRecommendationsDrinks()
@@ -34,15 +39,31 @@ function Detail() {
   }
 
   useEffect(() => {
+    console.log(recipesInProg);
+
+    const id = location.pathname.split('/')[2];
+
+    const idsMeals = Object.keys(recipesInProg)
+      .includes('meals')
+      ? Object.keys(recipesInProg.meals)
+      : [];
+    if (idsMeals.includes(id)) setStarted(true);
+
+    const idsDrinks = Object.keys(recipesInProg)
+      .includes('cocktails')
+      ? Object.keys(recipesInProg.cocktails)
+      : [];
+    if (idsDrinks.includes(id)) setStarted(true);
+
     const fetchDetails = async () => {
       if (location.pathname.includes('foods')) {
         getDrinksRecomendations();
-        fetchMealsDetails(location.pathname.split('/')[2]).then((response) => {
+        fetchMealsDetails(id).then((response) => {
           setRecipesDetails(response.meals);
         });
       } else {
         getMealsRecomendations();
-        fetchDrinkDetails(location.pathname.split('/')[2]).then((response) => {
+        fetchDrinkDetails(id).then((response) => {
           setRecipesDetails(response.drinks);
         });
       }
@@ -51,34 +72,9 @@ function Detail() {
     fetchDetails();
   }, []);
 
-  const handleClick = () => {
-    const recipesInProg = getName('inProgressRecipes')
-      ? getName('inProgressRecipes')
-      : ({
-        cocktail: {},
-        meals: {} });
-
-    if (recipesDetails.length > 0) {
-      const ingridients = Object.keys(recipesDetails[0])
-        .filter((key) => key.includes('strIngredient'))
-        .map((e) => (recipesDetails[0][e]));
-
-      setStarted(true);
-      if (location.pathname.includes('foods')) {
-        recipesInProg.meals[recipesDetails[0].idMeal] = ingridients;
-        console.log(recipesInProg);
-        setName('inProgressRecipes', recipesInProg);
-        history.push(`/foods/${recipesDetails[0].idMeal}/in-progress`);
-      } else {
-        recipesInProg.cocktail[recipesDetails[0].idDrink] = ingridients;
-        setName('inProgressRecipes', recipesInProg);
-        history.push(`/drinks/${recipesDetails[0].idDrink}/in-progress`);
-      }
-    }
-  };
-
   return (
     <div>
+      { console.log(recipesInProg)}
       {
         recipesDetails.length > 0 && (
           <div>
@@ -91,22 +87,7 @@ function Detail() {
             <div className="cardsRecomendation">
               <Card />
             </div>
-            {/* botao de inicio da receita */}
-            {
-              <button
-                className="StartRecipe"
-                type="button"
-                data-testid="start-recipe-btn"
-                onClick={ handleClick }
-              >
-                {
-                  started
-                    ? ('Continue Recipe')
-                    : ('Start recipe')
-                }
-
-              </button>
-            }
+            <RecipesStatus recipesInProg={ recipesInProg } />
           </div>)
       }
     </div>
