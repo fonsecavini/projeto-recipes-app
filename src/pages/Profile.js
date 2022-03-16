@@ -15,6 +15,7 @@ function Profile(props) {
 
   const emailUser = localStorage.getItem('user');
   const user = JSON.parse(emailUser);
+  console.log(user);
 
   const handleClickFavorite = () => {
     history.push('/favorite-recipes');

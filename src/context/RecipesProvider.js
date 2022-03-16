@@ -18,7 +18,7 @@ function RecipesProvider({ children }) {
   const [toggle, setToggle] = useState(true);
   const [recomendationMount, setRecomendationMount] = useState([]);
   const [email, setEmail] = useState('');
-  console.log(toggle);
+  console.log(email);
 
   const contextValue = {
     recomendationMount,
