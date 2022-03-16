@@ -37,7 +37,7 @@ function Profile(props) {
     <div>
       <Header title="Profile" />
       <div>
-        <h2 data-testid="profile-email">{ user.email }</h2>
+        <h2 data-testid="profile-email">{ user ? user.email : null }</h2>
         <button
           type="button"
           data-testid="profile-done-btn"
@@ -52,6 +52,7 @@ function Profile(props) {
         >
           Favorite Recipes
         </button>
+        { console.log('xablau') }
         <button
           type="button"
           data-testid="profile-logout-btn"

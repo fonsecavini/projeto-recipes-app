@@ -1,9 +1,10 @@
 import React from 'react';
+import DetailInfo from '../components/DetailInfo';
 
 function DrinkInProgress() {
   return (
     <div>
-      <p> a </p>
+      <DetailInfo />
     </div>
   );
 }
