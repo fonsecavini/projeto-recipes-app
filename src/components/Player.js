@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 function Player(props) {
   const { url } = props;
   const opts = {
-    height: '390',
+    height: '360',
     width: '640',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
