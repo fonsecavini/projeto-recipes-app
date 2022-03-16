@@ -1,0 +1,25 @@
+.StartRecipe {
+  bottom: 0%;
+  position: fixed;
+  width: 100%;
+}
+
+.cardsRecomendation {
+  bottom: 20%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.cards-box {
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  width: 360px;
+}
+
+.cards {
+  left: 10px;
+  width: 180px;
+}

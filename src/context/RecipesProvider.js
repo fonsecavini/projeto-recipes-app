@@ -17,8 +17,13 @@ function RecipesProvider({ children }) {
   const [drinksByCategory, setDrinksByCategory] = useState([]);
   const [toggle, setToggle] = useState(true);
   const [recomendationMount, setRecomendationMount] = useState([]);
-  const [email, setEmail] = useState('');
-  console.log(toggle);
+  const [measure, setMeasure] = useState([]);
+  const [ingredient, setingredient] = useState([]);
+  const [started, setStarted] = useState(false);
+  const [recipesInProgress, setRecipesInProgress] = useState([]);
+  const [searchByIngredient, setSearchByIngredient] = useState('');
+
+  // console.log(toggle);
 
   const contextValue = {
     recomendationMount,
@@ -49,8 +54,16 @@ function RecipesProvider({ children }) {
     setDrinksByCategory,
     toggle,
     setToggle,
-    email,
-    setEmail,
+    measure,
+    setMeasure,
+    ingredient,
+    setingredient,
+    started,
+    setStarted,
+    recipesInProgress,
+    setRecipesInProgress,
+    searchByIngredient,
+    setSearchByIngredient,
   };
 
   return (

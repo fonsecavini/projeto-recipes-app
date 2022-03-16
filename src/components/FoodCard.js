@@ -18,17 +18,19 @@ function FoodCard(props) {
   return (
     <Link
       onClick={ () => handleClick(dataMeals.idMeal) }
+      className="cards"
       to={ `/foods/${dataMeals.idMeal}` }
       data-testid={ `${index}-card-name` }
     >
-      <div data-testid={ dataTestid }>
-        {dataMeals.strMeal}
-        <img
-          data-testid={ `${index}-card-img` }
-          src={ strMealThumb }
-          alt="Meal"
-          width="100px"
-        />
+      <div data-testid={ `${index}-recomendation-title` }>
+        <div data-testid={ dataTestid }>
+          {dataMeals.strMeal}
+          <img
+            data-testid={ `${index}-card-img` }
+            src={ strMealThumb }
+            alt="Meal"
+          />
+        </div>
       </div>
     </Link>
   );
