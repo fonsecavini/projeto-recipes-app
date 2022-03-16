@@ -37,7 +37,7 @@ function RecipeInProgress() {
               return '';
             }
             return (
-              <div key={ e }>
+              <div key={ ingredient[index] }>
                 <input
                   id={ ingredient[index] }
                   type="checkbox"

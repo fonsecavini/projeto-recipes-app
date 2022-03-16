@@ -22,7 +22,6 @@ function ExploreByNationalities() {
     if (value === 'All') {
       const response = await fetchRecipesAll();
       setRecipesArea(response.meals);
-      console.log(recipesArea);
     }
     const response = await fetchRecipesByArea(value);
     setRecipesArea(response.meals);
