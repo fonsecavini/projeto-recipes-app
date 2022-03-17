@@ -38,6 +38,18 @@ function Detail() {
       .then((response) => setRecomendationMount(response.meals));
   }
 
+  const fetchDetails = async () => {
+    if (location.pathname.includes('foods')) {
+      getDrinksRecomendations();
+      const response = await fetchMealsDetails(id);
+      setRecipesDetails(response.meals);
+    } else {
+      getMealsRecomendations();
+      const response = await fetchDrinkDetails(id);
+      setRecipesDetails(response.drinks);
+    }
+  };
+
   useEffect(() => {
     console.log(recipesInProg);
 
@@ -54,20 +66,6 @@ function Detail() {
       ? Object.keys(recipesInProg.cocktails)
       : [];
     if (idsDrinks.includes(id)) setStarted(true);
-
-    const fetchDetails = async () => {
-      if (location.pathname.includes('foods')) {
-        getDrinksRecomendations();
-        fetchMealsDetails(id).then((response) => {
-          setRecipesDetails(response.meals);
-        });
-      } else {
-        getMealsRecomendations();
-        fetchDrinkDetails(id).then((response) => {
-          setRecipesDetails(response.drinks);
-        });
-      }
-    };
 
     fetchDetails();
   }, []);
