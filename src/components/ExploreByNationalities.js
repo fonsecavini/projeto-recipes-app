@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchByNationalities,
   fetchRecipesByArea,
-  fetchRecipesAll,
+  fetchRecommendationsMeals,
 } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 
@@ -17,20 +17,26 @@ function ExploreByNationalities() {
     fetchByNationalities().then((response) => setAreaFoods(response.meals));
   };
 
+  const fetchAll = async () => {
+    const response = await fetchRecommendationsMeals();
+    setRecipesArea(response.meals);
+    console.log(response.meals);
+  };
+
   const fetchByArea = async ({ target: { value } }) => {
     console.log(value);
     if (value === 'All') {
-      const response = await fetchRecipesAll();
+      fetchAll();
+    } else {
+      const response = await fetchRecipesByArea(value);
       setRecipesArea(response.meals);
-      console.log(recipesArea);
+      console.log(response.meals);
     }
-    const response = await fetchRecipesByArea(value);
-    setRecipesArea(response.meals);
-    console.log(recipesArea);
   };
-
+  console.log(recipesArea);
   useEffect(() => {
     fetchNationalitties();
+    fetchAll();
   }, []);
 
   const TWELVE = 12;
@@ -75,9 +81,11 @@ function ExploreByNationalities() {
                 src={ recipes.strMealThumb }
                 alt="FoodsExplore"
                 width="200"
+                data-testid={ `${index}-card-img` }
               />
               <h2
                 id={ recipes.idMeal }
+                data-testid={ `${index}-card-name` }
               >
                 { recipes.strMeal }
               </h2>

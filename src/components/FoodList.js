@@ -21,9 +21,10 @@ function FoodList() {
     }
   }
 
-  function handleMeals() {
-    fetchRecommendationsMeals().then((response) => setMealsMount(response.meals));
-  }
+  const handleMeals = async () => {
+    const response = await fetchRecommendationsMeals();
+    setMealsMount(response.meals);
+  };
 
   useEffect(() => {
     if (toggle === true) {

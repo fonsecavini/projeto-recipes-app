@@ -1,15 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
 function DetailInfo() {
-  const { favorite,
-    setFavorite,
-    recipesDetails } = useContext(recipesContext);
   const location = useLocation();
+  const id = location.pathname.split('/')[2];
+
+  const { favorite,
+    setFavorite } = useContext(recipesContext);
   const url = window.location.href;
   const [message, setMessage] = useState(false);
 
@@ -30,21 +32,46 @@ function DetailInfo() {
     navigator.clipboard.writeText(url);
     setTimeout(() => setMessage(false), TWO_SECONDS);
   };
+  const fetchDetails = async () => {
+    if (location.pathname.includes('foods')) {
+      const response = await fetchMealsDetails(id);
+      return response.meals;
+      // setRecipesDetails(response.meals);
+    }
+    const response = await fetchDrinkDetails(id);
+    return response.drinks;
+    // setRecipesDetails(response.drinks);
+  };
+
+  const teste2 = (param) => {
+    const response2 = param;
+    return response2;
+  };
+
+  const teste = async () => {
+    const response = await fetchDetails();
+    return response;
+    // teste2(response);
+  };
+  useEffect(() => {
+    teste();
+  }, []);
 
   return (
     <div>
+      {console.log(teste)}
       {
-        recipesDetails.length > 0 && (
+        teste.length > 0 && (
           <div>
             {/* imagem da receita */}
             <img
               data-testid="recipe-photo"
-              src={ recipesDetails[0][image] }
+              src={ teste[0][image] }
               alt="recipe"
             />
             {/* titulo da receita  */}
             <h1 data-testid="recipe-title">
-              {recipesDetails[0][title] }
+              {teste[0][title] }
             </h1>
             {/* botao de compartilhar */}
             <input
@@ -64,12 +91,12 @@ function DetailInfo() {
             />
             {/* texto da categoria */}
             { location.pathname.includes('foods')
-            && <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>}
+            && <p data-testid="recipe-category">{teste[0].strCategory}</p>}
 
             { location.pathname.includes('drinks')
-            && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
+            && <p data-testid="recipe-category">{teste[0].strAlcoholic}</p>}
             <p data-testid="instructions">
-              { recipesDetails[0].strInstructions}
+              { teste[0].strInstructions}
             </p>
           </div>
         )

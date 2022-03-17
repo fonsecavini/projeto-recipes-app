@@ -14,7 +14,6 @@ export const fetchDrinksByCategory = async (category) => {
 };
 
 export const fetchIgredient = async (ingredient) => {
-  console.log('chamou');
   const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const response = result.json();
   return response;
@@ -136,12 +135,6 @@ export const fetchByNationalities = async () => {
 
 export const fetchRecipesByArea = async (Area) => {
   const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Area}`);
-  const response = result.json();
-  return response;
-};
-
-export const fetchRecipesAll = async () => {
-  const result = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=');
   const response = result.json();
   return response;
 };

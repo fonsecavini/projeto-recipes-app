@@ -1,25 +1,26 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { fetchMealsDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 
 function FoodCard(props) {
   const { dataMeals, index, strMealThumb, dataTestid } = props;
-  const { recipesDetails, setRecipesDetails } = useContext(recipesContext);
+  const { setRecipesDetails } = useContext(recipesContext);
+  const history = useHistory();
 
   const handleClick = async (id) => {
-    fetchMealsDetails(id).then((response) => {
-      setRecipesDetails(response.meals);
-    });
-    console.log(recipesDetails);
+    const response = await fetchMealsDetails(id);
+    setRecipesDetails(response.meals);
+    history.push(`/foods/${id}`);
   };
 
   return (
-    <Link
+    <button
+      type="button"
       onClick={ () => handleClick(dataMeals.idMeal) }
       className="cards"
-      to={ `/foods/${dataMeals.idMeal}` }
+      // to={ `/foods/${dataMeals.idMeal}` }
       data-testid={ `${index}-card-name` }
     >
       <div data-testid={ `${index}-recomendation-title` }>
@@ -32,7 +33,7 @@ function FoodCard(props) {
           />
         </div>
       </div>
-    </Link>
+    </button>
   );
 }
 

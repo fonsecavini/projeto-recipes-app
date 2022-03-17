@@ -11,6 +11,7 @@ function RecipesStatus(props) {
   const history = useHistory();
   const { started, recipesDetails } = useContext(recipesContext);
   const { recipesInProg } = props;
+
   const handleClick = () => {
     if (recipesDetails.length > 0) {
       const ingridients = Object.keys(recipesDetails[0])

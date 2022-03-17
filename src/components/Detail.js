@@ -22,11 +22,13 @@ const recipesInProg = getName('inProgressRecipes')
     meals: {} });
 
 function Detail() {
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+
   const {
     recipesDetails, setRecipesDetails, setRecomendationMount,
     setStarted,
   } = useContext(recipesContext);
-  const location = useLocation();
 
   function getDrinksRecomendations() {
     fetchRecommendationsDrinks()
@@ -52,8 +54,6 @@ function Detail() {
 
   useEffect(() => {
     console.log(recipesInProg);
-
-    const id = location.pathname.split('/')[2];
 
     const idsMeals = Object.keys(recipesInProg)
       .includes('meals')

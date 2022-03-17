@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
@@ -8,18 +8,19 @@ import '../css/details.css';
 function DrinkCard(props) {
   const { dataDrinks, index, strDrinkThumb, dataTestid } = props;
   const { setRecipesDetails } = useContext(recipesContext);
+  const history = useHistory();
 
   const handleClick = async (id) => {
-    fetchDrinkDetails(id).then((response) => {
-      setRecipesDetails(response.drinks);
-    });
+    const response = await fetchDrinkDetails(id);
+    setRecipesDetails(response.drinks);
+    history.push(`/drinks/${id}`);
   };
 
   return (
-    <Link
+    <button
+      type="button"
       onClick={ () => handleClick(dataDrinks.idDrink) }
       className="cards"
-      to={ `/drinks/${dataDrinks.idDrink}` }
       data-testid={ `${index}-card-name` }
     >
       <div data-testid={ `${index}-recomendation-title` }>
@@ -32,7 +33,7 @@ function DrinkCard(props) {
           />
         </div>
       </div>
-    </Link>
+    </button>
   );
 }
 

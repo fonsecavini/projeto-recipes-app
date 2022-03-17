@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { fetchIngredientsDrinks, fetchIngredientsMeals } from '../services/fetchApi';
+import { useLocation, useHistory } from 'react-router-dom';
+import { fetchIngredientsDrinks,
+  fetchIngredientsMeals,
+  fetchIgredient,
+  fetchCocktailIgredient } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 
 const ExploreByIngredients = () => {
-  const { setSearchByIngredient } = useContext(recipesContext);
+  const { setRecipes } = useContext(recipesContext);
   const [ingredients, setIngredients] = useState([]);
+  const history = useHistory();
   const location = useLocation();
+  const drinksLocation = '/explore/drinks/ingredients';
 
   const fetchIngredients = () => {
-    if (location.pathname === '/explore/drinks/ingredients') {
+    if (location.pathname === drinksLocation) {
       fetchIngredientsDrinks().then((response) => setIngredients(response.drinks));
     } if (location.pathname === '/explore/foods/ingredients') {
       fetchIngredientsMeals().then((response) => setIngredients(response.meals));
@@ -20,22 +25,28 @@ const ExploreByIngredients = () => {
     fetchIngredients();
   }, []);
 
-  const handleClick = ({ target }) => {
-    console.log(target.id);
-    setSearchByIngredient(target.id);
+  const handleClick = async ({ target }) => {
+    if (location.pathname === '/explore/foods/ingredients') {
+      const responseMeals = await fetchIgredient(target.id);
+      setRecipes(responseMeals.meals);
+      history.push('/foods');
+    }
+    if (location.pathname === drinksLocation) {
+      const responseDrinks = await fetchCocktailIgredient(target.id);
+      setRecipes(responseDrinks.drinks);
+      history.push('/drinks');
+    }
   };
 
   const TWELVE = 12;
 
   return (
     <div>
-      { location.pathname === '/explore/drinks/ingredients' ? (
+      { location.pathname === drinksLocation ? (
         ingredients.slice(0, TWELVE).map((ingredient, index) => (
-          <Link
+          <button
             key={ ingredient.strIngredient1 }
-            className="card"
-            to="/drinks"
-            value={ ingredient.strIngredient1 }
+            type="button"
             onClick={ handleClick }
             data-testid={ `${index}-ingredient-card` }
           >
@@ -44,6 +55,7 @@ const ExploreByIngredients = () => {
               src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
               alt="DrinksIngredients"
               width="200"
+              id={ ingredient.strIngredient1 }
             />
             <h2
               id={ ingredient.strIngredient1 }
@@ -51,31 +63,31 @@ const ExploreByIngredients = () => {
             >
               { ingredient.strIngredient1 }
             </h2>
-          </Link>
+          </button>
         ))) : (
         ingredients.slice(0, TWELVE).map((ingredient, index) => (
-          <Link
+          <button
             key={ ingredient.strIngredient }
-            className="card"
-            to="/foods"
-            value={ ingredient.strIngredient }
+            type="button"
             onClick={ handleClick }
             data-testid={ `${index}-ingredient-card` }
           >
-            <img
-              id={ ingredient.strIngredient }
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-              alt="FoodsIngredients"
-              width="200"
-            />
-            <h2
-              id={ ingredient.strIngredient }
-              data-testid={ `${index}-card-name` }
-            >
-              { ingredient.strIngredient }
-            </h2>
-          </Link>
+            <div>
+              <img
+                id={ ingredient.strIngredient }
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                alt="FoodsIngredients"
+                width="200"
+              />
+              <h2
+                id={ ingredient.strIngredient }
+                data-testid={ `${index}-card-name` }
+              >
+                { ingredient.strIngredient }
+              </h2>
+            </div>
+          </button>
         ))
       )}
     </div>

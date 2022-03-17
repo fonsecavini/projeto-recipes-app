@@ -18,7 +18,6 @@ function Explore(props) {
   });
 
   const handleClick = ({ target }) => {
-    console.log(target.value);
     if (target.value === 'Foods') {
       history.push('/explore/foods');
     }
