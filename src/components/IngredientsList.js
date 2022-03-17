@@ -38,8 +38,10 @@ function IngredientsList() {
 
   useEffect(() => {
     getMeasureAndIngridient();
-    
-    return 
+    return () => {
+      setMeasure([]);
+      setingredient([]);
+    };
   }, []);
 
   console.log(measure);
