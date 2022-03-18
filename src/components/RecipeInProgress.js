@@ -72,21 +72,19 @@ function RecipeInProgress() {
               // if (measure[e] === null || recipesDetails[0][e] === '') {
               //   return '';
               // }
-
-              <div key={ e }>
-                <input
-                  id={ e }
-                  type="checkbox"
-                  key={ e }
-                  data-testid={
-                    `${index}-ingredient-name-and-measure`
-                  }
-                />
-                <label htmlFor={ e }>
+              <li
+                key={ e }
+                data-testid="ingredient-step"
+              >
+                <label htmlFor={ e } key={ e }>
+                  <input
+                    type="checkbox"
+                    id={ e }
+                  />
                   {/* { recipesDetails[0][e]} */}
                   { `${e}-${measure[index]}`}
                 </label>
-              </div>
+              </li>
             ))
           }
         </ul>
@@ -94,6 +92,7 @@ function RecipeInProgress() {
       <button
         type="button"
         disabled
+        data-testid="finish-recipe-btn"
       >
         Finish Recipes
       </button>

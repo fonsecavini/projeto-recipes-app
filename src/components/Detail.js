@@ -72,7 +72,7 @@ function Detail() {
 
   return (
     <div>
-      { console.log(recipesInProg)}
+      { console.log(recipesDetails)}
       {
         recipesDetails.length > 0 && (
           <div>

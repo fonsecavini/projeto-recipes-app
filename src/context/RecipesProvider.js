@@ -29,8 +29,11 @@ function RecipesProvider({ children }) {
   const [areaFoods, setAreaFoods] = useState([]);
   const [recipesArea, setRecipesArea] = useState([]);
   const [recipesAll, setRecipesAll] = useState([]);
+  const [recipesDetails2, setRecipesDetails2] = useState([]);
 
   const contextValue = {
+    recipesDetails2,
+    setRecipesDetails2,
     recomendationMount,
     setRecomendationMount,
     favorite,
