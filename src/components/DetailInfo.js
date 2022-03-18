@@ -43,10 +43,10 @@ function DetailInfo() {
     // setRecipesDetails(response.drinks);
   };
 
-  const teste2 = (param) => {
-    const response2 = param;
-    return response2;
-  };
+  // const teste2 = (param) => {
+  //   const response2 = param;
+  //   return response2;
+  // };
 
   const teste = async () => {
     const response = await fetchDetails();
