@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import Footer from '../components/BottomMenu';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function Explore(props) {
   const {

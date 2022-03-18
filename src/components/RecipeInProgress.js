@@ -1,7 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
+import { setName, getName } from '../services/RecipesLocalStorage';
+import '../css/details.css';
 
 function RecipeInProgress() {
   const location = useLocation();
@@ -15,9 +17,12 @@ function RecipeInProgress() {
     ingredient,
     // setRecipesDetails,
   } = useContext(recipesContext);
+  // const progressRecipes = getName('inProgressRecipes');
+  // const ingredientRecipe = progressRecipes.meals[id];
+
+  const [isChecked, setIsChecked] = useState(false);
 
   const getMeasureAndIngridient = (param) => {
-    console.log(param);
     if (param.length > 0) {
       const measures = Object.keys(param[0]);
       const measures1 = measures.filter((key) => key.includes('strMeasure'));
@@ -55,16 +60,43 @@ function RecipeInProgress() {
     return response.drinks;
     // setRecipesDetails(response.drinks);
   };
-  const teste = async () => {
+  const getDetails = async () => {
     const response = await fetchDetails();
     getMeasureAndIngridient(response);
   };
+
   useEffect(() => {
-    teste();
+    // setIsChecked(ingredientRecipe.some((w) => w === ingredient));
+    getDetails();
   }, []);
+  // ({ ingredient: '', checked: false })
+  // e.checked = !e.checked;
+
+  let stepDoneAll = [];
+  const handleChange = ({ target }) => {
+    const stepDone = getName('inProgressRecipes')
+      ? getName('inProgressRecipes')
+      : ({
+        cocktail: {},
+        meals: {} });
+    // const stepDone2 = [{ ingredient: target.name }];
+    const stepDone2 = [target.name];
+    stepDoneAll = [...stepDoneAll, ...stepDone2];
+    // console.log('stepdone', stepDone);
+
+    if (location.pathname.includes('foods')) {
+      stepDone.meals[id] = [...stepDoneAll];
+      console.log(stepDone);
+      setName('inProgressRecipes', stepDone);
+    } else {
+      stepDone.cocktail[id] = stepDone;
+      setName('inProgressRecipes', stepDone);
+    }
+    setIsChecked(!isChecked);
+  };
 
   return (
-    <div>
+    <div className="ingredientCss">
       {
         <ul>
           {
@@ -78,6 +110,8 @@ function RecipeInProgress() {
               >
                 <label htmlFor={ e } key={ e }>
                   <input
+                    name={ e }
+                    onChange={ handleChange }
                     type="checkbox"
                     id={ e }
                   />

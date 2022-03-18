@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/BottomMenu';
 import DrinkList from '../components/DrinksList';
 import DrinksCategories from '../components/DrinksCategories';
+import '../css/details.css';
 
 function Drinks() {
   return (

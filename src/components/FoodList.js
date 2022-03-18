@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import { fetchRecommendationsMeals } from '../services/fetchApi';
 import FoodCard from './FoodCard';
+import '../css/details.css';
 
 function FoodList() {
   const { recipes,
@@ -14,12 +15,8 @@ function FoodList() {
     toggle } = useContext(recipesContext);
 
   const TWELVE = 12;
-
-  function handleRedirect() {
-    if (recipes && recipes.length === 1) {
-      return setRedirect(true);
-    }
-  }
+  console.log(recipes);
+  console.log(mealsMount);
 
   const handleMeals = async () => {
     const response = await fetchRecommendationsMeals();
@@ -32,10 +29,13 @@ function FoodList() {
     }
   }, [toggle]);
 
+  function handleRedirect() {
+    return setRedirect(true);
+  }
+
   useEffect(() => {
-    handleRedirect();
-    if (recipes === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    if (recipes && recipes.length === 1) {
+      handleRedirect();
     }
   });
 
@@ -49,7 +49,7 @@ function FoodList() {
           strMealThumb={ meals.strMealThumb }
           dataTestid={ `${index}-recipe-card` }
         />
-      ))}
+      )) }
       { recipes.length === 0
         && mealsMount.length > 0
         && mealsMount.slice(0, TWELVE).map((meal, index) => (

@@ -3,7 +3,6 @@ import { useLocation, useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import recipesContext from '../context/RecipesContext';
 import { setName } from '../services/RecipesLocalStorage';
-
 import '../css/details.css';
 
 function RecipesStatus(props) {

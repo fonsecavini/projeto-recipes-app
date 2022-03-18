@@ -5,6 +5,7 @@ import SearchIcon from '../images/searchIcon.svg';
 import ProfileIcon from '../images/profileIcon.svg';
 import RecipesContext from '../context/RecipesContext';
 import SearchBar from './SearchBar';
+import '../css/details.css';
 
 function Header(props) {
   // const [searchEnable, setSearchEnable] = useState(true);

@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import Footer from '../components/BottomMenu';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function Profile(props) {
   const {
@@ -15,7 +16,6 @@ function Profile(props) {
 
   const emailUser = localStorage.getItem('user');
   const user = JSON.parse(emailUser);
-  console.log(user);
 
   const handleClickFavorite = () => {
     history.push('/favorite-recipes');
@@ -34,7 +34,7 @@ function Profile(props) {
     if (location.pathname === '/profile') setSearchEnable(false);
   });
   return (
-    <div>
+    <div className="profileCss">
       <Header title="Profile" />
       <div>
         <h2 data-testid="profile-email">{ user ? user.email : null }</h2>

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import { fetchRecommendationsDrinks } from '../services/fetchApi';
 import DrinkCard from './DrinkCard';
+import '../css/details.css';
 
 function DrinkList() {
   const { recipes,

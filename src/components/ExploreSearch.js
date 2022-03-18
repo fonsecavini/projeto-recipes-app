@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { fetchSurpriseMeal, fetchSurpriseDrink } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function ExploreSearch() {
   const location = useLocation();

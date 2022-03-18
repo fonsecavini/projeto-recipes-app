@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function FavoritesRecipes() {
   const {

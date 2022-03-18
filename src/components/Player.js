@@ -2,6 +2,7 @@ import React from 'react';
 import YouTube from 'react-youtube';
 import getYouTubeID from 'get-youtube-id';
 import propTypes from 'prop-types';
+import '../css/details.css';
 
 function Player(props) {
   const { url } = props;

@@ -7,6 +7,7 @@ import {
   fetchMealsDetails,
   fetchDrinkDetails,
 } from '../services/fetchApi';
+import '../css/details.css';
 
 function DrinkInProgress() {
   const { setRecipesDetails } = useContext(recipesContext);

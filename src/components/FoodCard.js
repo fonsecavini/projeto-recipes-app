@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { fetchMealsDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function FoodCard(props) {
   const { dataMeals, index, strMealThumb, dataTestid } = props;

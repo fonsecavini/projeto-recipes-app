@@ -5,6 +5,7 @@ import recipesContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import '../css/details.css';
 
 function DetailInfo() {
   const location = useLocation();

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/BottomMenu';
 import RecipesContext from '../context/RecipesContext';
 import ExploreByIngredients from '../components/ExploreByIngredients';
+import '../css/details.css';
 
 function ExploreFoodsByIngredients() {
   const {

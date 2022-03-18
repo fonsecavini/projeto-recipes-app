@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import '../css/details.css';
 
 function Login(props) {
   const [disable, setDisable] = useState(true);
@@ -34,7 +35,7 @@ function Login(props) {
   };
 
   return (
-    <div>
+    <div className="background">
       <form>
         <label htmlFor="email">
           <input

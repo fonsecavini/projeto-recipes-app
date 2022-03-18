@@ -5,6 +5,7 @@ import { fetchIngredientsDrinks,
   fetchIgredient,
   fetchCocktailIgredient } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 const ExploreByIngredients = () => {
   const { setRecipes } = useContext(recipesContext);

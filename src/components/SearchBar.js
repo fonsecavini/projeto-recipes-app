@@ -8,6 +8,7 @@ import { fetchIgredient,
   fetchCocktailName,
   fetchCocktailFirstLetter } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 // { useState }
 function SearchBar() {
   const [searchInput, setSearchInput] = useState('');

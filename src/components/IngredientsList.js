@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function IngredientsList() {
   const {
@@ -45,13 +46,11 @@ function IngredientsList() {
       setMeasure([]);
     };
   }, []);
-
-  console.log(measure);
   // { if (measure[index] === undefined) {
   //   return '';
   // } }
   return (
-    <div>
+    <div className="ingredientCss">
       <ul>
         {
           ingredient.map((e, index) => (

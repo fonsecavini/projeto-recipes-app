@@ -5,6 +5,7 @@ import { fetchByNationalities,
   fetchRecommendationsMeals,
 } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function ExploreByNationalities() {
   const { areaFoods,

@@ -29,6 +29,7 @@ function Detail() {
     recipesDetails, setRecipesDetails, setRecomendationMount,
     setStarted,
   } = useContext(recipesContext);
+  console.log(recipesDetails);
 
   function getDrinksRecomendations() {
     fetchRecommendationsDrinks()

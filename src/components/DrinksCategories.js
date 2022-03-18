@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import recipesContext from '../context/RecipesContext';
 import { fetchListCategoryDrink, fetchDrinksByCategory } from '../services/fetchApi';
+import '../css/details.css';
 
 function DrinksCategories() {
   const { drinkCategories,

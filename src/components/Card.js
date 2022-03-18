@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import DrinkCard from './DrinkCard';
 import FoodCard from './FoodCard';
 import RecipesContext from '../context/RecipesContext';
+import '../css/details.css';
 
 function Card() {
   const SIX = 6;
