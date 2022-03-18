@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
+// import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,9 +8,9 @@ import shareIcon from '../images/shareIcon.svg';
 
 function DetailInfo() {
   const location = useLocation();
-  const id = location.pathname.split('/')[2];
+  // const id = location.pathname.split('/')[2];
 
-  const { favorite,
+  const { favorite, recipesDetails,
     setFavorite } = useContext(recipesContext);
   const url = window.location.href;
   const [message, setMessage] = useState(false);
@@ -32,46 +32,45 @@ function DetailInfo() {
     navigator.clipboard.writeText(url);
     setTimeout(() => setMessage(false), TWO_SECONDS);
   };
-  const fetchDetails = async () => {
-    if (location.pathname.includes('foods')) {
-      const response = await fetchMealsDetails(id);
-      return response.meals;
-      // setRecipesDetails(response.meals);
-    }
-    const response = await fetchDrinkDetails(id);
-    return response.drinks;
-    // setRecipesDetails(response.drinks);
-  };
-
-  // const teste2 = (param) => {
-  //   const response2 = param;
-  //   return response2;
+  // const fetchDetails = async () => {
+  //   if (location.pathname.includes('foods')) {
+  //     const response = await fetchMealsDetails(id);
+  //     return response.meals;
+  //     // setRecipesDetailss(response.meals);
+  //   }
+  //   const response = await fetchDrinkDetails(id);
+  //   return response.drinks;
+  //   // setRecipesDetailss(response.drinks);
   // };
 
-  const teste = async () => {
-    const response = await fetchDetails();
-    return response;
-    // teste2(response);
-  };
-  useEffect(() => {
-    teste();
-  }, []);
+  // // const teste2 = (param) => {
+  // //   const response2 = param;
+  // //   return response2;
+  // // };
+
+  // const teste = async () => {
+  //   const response = await fetchDetails();
+  //   return response;
+  //   // teste2(response);
+  // };
+  // useEffect(() => {
+  //   teste();
+  // }, []);
 
   return (
     <div>
-      {console.log(teste)}
       {
-        teste.length > 0 && (
+        recipesDetails.length > 0 && (
           <div>
             {/* imagem da receita */}
             <img
               data-testid="recipe-photo"
-              src={ teste[0][image] }
+              src={ recipesDetails[0][image] }
               alt="recipe"
             />
             {/* titulo da receita  */}
             <h1 data-testid="recipe-title">
-              {teste[0][title] }
+              {recipesDetails[0][title] }
             </h1>
             {/* botao de compartilhar */}
             <input
@@ -91,12 +90,12 @@ function DetailInfo() {
             />
             {/* texto da categoria */}
             { location.pathname.includes('foods')
-            && <p data-testid="recipe-category">{teste[0].strCategory}</p>}
+            && <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>}
 
             { location.pathname.includes('drinks')
-            && <p data-testid="recipe-category">{teste[0].strAlcoholic}</p>}
+            && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
             <p data-testid="instructions">
-              { teste[0].strInstructions}
+              { recipesDetails[0].strInstructions}
             </p>
           </div>
         )
