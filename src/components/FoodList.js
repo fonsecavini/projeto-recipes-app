@@ -35,14 +35,11 @@ function FoodList() {
     if (recipes && recipes.length === 1) {
       handleRedirect();
     }
-    if (recipes === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    }
   });
 
   return (
     <div>
-      { recipes.length > 1 && recipes.slice(0, TWELVE).map((meals, index) => (
+      { recipes && recipes.slice(0, TWELVE).map((meals, index) => (
         <FoodCard
           key={ meals.idMeal }
           index={ index }

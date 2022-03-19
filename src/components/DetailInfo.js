@@ -14,7 +14,6 @@ function DetailInfo() {
   const { favorite, recipesDetails, handleFavorite } = useContext(recipesContext);
   const url = window.location.href;
   const [message, setMessage] = useState(false);
-  console.log(recipesDetails[0].idMeal);
 
   const title = location.pathname.includes('foods')
     ? 'strMeal'
