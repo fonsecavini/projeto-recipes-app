@@ -19,6 +19,10 @@
   width: 360px;
 }
 
+.stepDone{
+  text-decoration: line-through;
+}
+
 .cards {
   border-radius: 15%;
   box-shadow: 1px;

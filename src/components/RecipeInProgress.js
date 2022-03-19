@@ -10,17 +10,13 @@ function RecipeInProgress() {
   const id = location.pathname.split('/')[2];
 
   const {
-    // recipesDetails,
     measure,
     setMeasure,
     setingredient,
     ingredient,
-    // setRecipesDetails,
   } = useContext(recipesContext);
-  // const progressRecipes = getName('inProgressRecipes');
-  // const ingredientRecipe = progressRecipes.meals[id];
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState([]);
 
   const getMeasureAndIngridient = (param) => {
     if (param.length > 0) {
@@ -37,16 +33,8 @@ function RecipeInProgress() {
       const ingredients3 = ingredients2
         .filter((item) => item !== '' && item !== ' ' && item !== null);
       setingredient(ingredients3);
-
-      // const measures = Object.keys(recipesDetails[0])
-      //   .filter((key) => key.includes('strMeasure'))
-      //   .map((e) => (recipesDetails[0][e]));
-      // setMeasure(measures);
-
-      // const ingredients = Object.keys(recipesDetails[0])
-      //   .filter((key) => key.includes('strIngredient'))
-      //   .map((e) => (recipesDetails[0][e]));
-      // setingredient(ingredients);
+      const check = ingredients3.map((e) => e.length < 1);
+      setIsChecked(check);
     }
   };
 
@@ -54,49 +42,56 @@ function RecipeInProgress() {
     if (location.pathname.includes('foods')) {
       const response = await fetchMealsDetails(id);
       return response.meals;
-      // setRecipesDetails(response.meals);
     }
     const response = await fetchDrinkDetails(id);
     return response.drinks;
-    // setRecipesDetails(response.drinks);
   };
+
   const getDetails = async () => {
     const response = await fetchDetails();
     getMeasureAndIngridient(response);
   };
 
   useEffect(() => {
-    // setIsChecked(ingredientRecipe.some((w) => w === ingredient));
     getDetails();
   }, []);
-  // ({ ingredient: '', checked: false })
-  // e.checked = !e.checked;
 
-  let stepDoneAll = [];
-  const handleChange = ({ target }) => {
+  const handleChange = ({ target }, index) => {
+    const teste3 = isChecked.map((e, i) => {
+      if (index === i) return !e;
+      return e;
+    });
+    console.log(teste3);
     const stepDone = getName('inProgressRecipes')
       ? getName('inProgressRecipes')
       : ({
         cocktail: {},
         meals: {} });
-    // const stepDone2 = [{ ingredient: target.name }];
-    const stepDone2 = [target.name];
-    stepDoneAll = [...stepDoneAll, ...stepDone2];
-    // console.log('stepdone', stepDone);
 
     if (location.pathname.includes('foods')) {
+      const stepDone2 = [target.name];
+      let stepDoneAll = stepDone.meals[id]
+        ? stepDone.meals[id]
+        : stepDone.meals[id] = [];
+      stepDoneAll = [...stepDoneAll, ...stepDone2];
       stepDone.meals[id] = [...stepDoneAll];
-      console.log(stepDone);
       setName('inProgressRecipes', stepDone);
     } else {
-      stepDone.cocktail[id] = stepDone;
+      const stepDone2 = [target.name];
+      let stepDoneAll = stepDone.cocktail[id]
+        ? stepDone.cocktail[id]
+        : stepDone.cocktail[id] = [];
+      stepDoneAll = [...stepDoneAll, ...stepDone2];
+      stepDone.cocktail[id] = stepDoneAll;
       setName('inProgressRecipes', stepDone);
     }
-    setIsChecked(!isChecked);
+    setIsChecked(teste3);
   };
 
   return (
     <div className="ingredientCss">
+      { console.log(isChecked) }
+      {' '}
       {
         <ul>
           {
@@ -108,10 +103,15 @@ function RecipeInProgress() {
                 key={ e }
                 data-testid="ingredient-step"
               >
-                <label htmlFor={ e } key={ e }>
+                <label
+                  htmlFor={ e }
+                  key={ e }
+                  className={ isChecked[index] ? 'stepDone' : 'stepToDone' }
+                >
                   <input
                     name={ e }
-                    onChange={ handleChange }
+                    checked={ isChecked[index] }
+                    onChange={ (target) => handleChange(target, index) }
                     type="checkbox"
                     id={ e }
                   />
