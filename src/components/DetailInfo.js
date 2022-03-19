@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 // import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import '../css/details.css';
+import ShareButton from './ShareButton';
 
 function DetailInfo() {
   const location = useLocation();
@@ -16,8 +16,6 @@ function DetailInfo() {
     recipesDetails,
     handleFavorite,
     setFavorite } = useContext(recipesContext);
-  const url = window.location.href;
-  const [message, setMessage] = useState(false);
 
   const title = location.pathname.includes('foods')
     ? 'strMeal'
@@ -25,13 +23,6 @@ function DetailInfo() {
   const image = location.pathname.includes('foods')
     ? 'strMealThumb'
     : 'strDrinkThumb';
-
-  const handleShare = () => {
-    const TWO_SECONDS = 2000;
-    setMessage(true);
-    navigator.clipboard.writeText(url);
-    setTimeout(() => setMessage(false), TWO_SECONDS);
-  };
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null) {
@@ -83,14 +74,8 @@ function DetailInfo() {
               {recipesDetails[0][title] }
             </h1>
             {/* botao de compartilhar */}
-            <input
-              type="image"
-              data-testid="share-btn"
-              src={ shareIcon }
-              alt="share"
-              onClick={ handleShare }
-            />
-            {message ? <span>Link copied!</span> : null}
+            <ShareButton />
+            {/* botao de favoritar */}
             <input
               type="image"
               data-testid="favorite-btn"
