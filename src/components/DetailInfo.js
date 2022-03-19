@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 // import { fetchMealsDetails, fetchDrinkDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -9,9 +9,13 @@ import '../css/details.css';
 
 function DetailInfo() {
   const location = useLocation();
+  const { id } = useParams();
   // const id = location.pathname.split('/')[2];
 
-  const { favorite, recipesDetails, handleFavorite } = useContext(recipesContext);
+  const { favorite,
+    recipesDetails,
+    handleFavorite,
+    setFavorite } = useContext(recipesContext);
   const url = window.location.href;
   const [message, setMessage] = useState(false);
 
@@ -28,6 +32,16 @@ function DetailInfo() {
     navigator.clipboard.writeText(url);
     setTimeout(() => setMessage(false), TWO_SECONDS);
   };
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null) {
+      if ((localStorage.getItem('favoriteRecipes')).includes(id)) {
+        setFavorite(true);
+      } else {
+        setFavorite(false);
+      }
+    }
+  }, []);
   // const fetchDetails = async () => {
   //   if (location.pathname.includes('foods')) {
   //     const response = await fetchMealsDetails(id);
