@@ -29,7 +29,6 @@ function Detail() {
     recipesDetails, setRecipesDetails, setRecomendationMount,
     setStarted,
   } = useContext(recipesContext);
-  console.log(recipesDetails);
 
   function getDrinksRecomendations() {
     fetchRecommendationsDrinks()
@@ -54,8 +53,6 @@ function Detail() {
   };
 
   useEffect(() => {
-    console.log(recipesInProg);
-
     const idsMeals = Object.keys(recipesInProg)
       .includes('meals')
       ? Object.keys(recipesInProg.meals)
@@ -73,7 +70,6 @@ function Detail() {
 
   return (
     <div>
-      { console.log(recipesDetails)}
       {
         recipesDetails.length > 0 && (
           <div>

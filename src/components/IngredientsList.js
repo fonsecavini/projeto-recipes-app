@@ -11,10 +11,6 @@ function IngredientsList() {
     ingredient,
   } = useContext(recipesContext);
 
-  console.log(recipesDetails[0]);
-
-  // console.log(ingredients);
-
   const getMeasureAndIngridient = () => {
     if (recipesDetails.length > 0) {
       const measures = Object.keys(recipesDetails[0]);

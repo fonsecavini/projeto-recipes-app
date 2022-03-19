@@ -15,8 +15,6 @@ function FoodList() {
     toggle } = useContext(recipesContext);
 
   const TWELVE = 12;
-  console.log(recipes);
-  console.log(mealsMount);
 
   const handleMeals = async () => {
     const response = await fetchRecommendationsMeals();
@@ -37,11 +35,14 @@ function FoodList() {
     if (recipes && recipes.length === 1) {
       handleRedirect();
     }
+    if (recipes === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
   });
 
   return (
     <div>
-      { recipes && recipes.slice(0, TWELVE).map((meals, index) => (
+      { recipes.length > 1 && recipes.slice(0, TWELVE).map((meals, index) => (
         <FoodCard
           key={ meals.idMeal }
           index={ index }

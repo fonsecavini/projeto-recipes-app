@@ -52,7 +52,6 @@ function Profile(props) {
         >
           Favorite Recipes
         </button>
-        { console.log('xablau') }
         <button
           type="button"
           data-testid="profile-logout-btn"

@@ -11,10 +11,10 @@ function DetailInfo() {
   const location = useLocation();
   // const id = location.pathname.split('/')[2];
 
-  const { favorite, recipesDetails,
-    setFavorite } = useContext(recipesContext);
+  const { favorite, recipesDetails, handleFavorite } = useContext(recipesContext);
   const url = window.location.href;
   const [message, setMessage] = useState(false);
+  console.log(recipesDetails[0].idMeal);
 
   const title = location.pathname.includes('foods')
     ? 'strMeal'
@@ -22,10 +22,6 @@ function DetailInfo() {
   const image = location.pathname.includes('foods')
     ? 'strMealThumb'
     : 'strDrinkThumb';
-
-  const handleFavorite = () => {
-    setFavorite(!favorite);
-  };
 
   const handleShare = () => {
     const TWO_SECONDS = 2000;
@@ -86,6 +82,7 @@ function DetailInfo() {
               type="image"
               data-testid="favorite-btn"
               onClick={ handleFavorite }
+              value={ recipesDetails[0] }
               src={ favorite ? blackHeartIcon : whiteHeartIcon }
               alt={ favorite ? 'blackHeartIcon' : 'whiteHeartIcon' }
             />

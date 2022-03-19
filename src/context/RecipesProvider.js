@@ -31,7 +31,36 @@ function RecipesProvider({ children }) {
   const [recipesAll, setRecipesAll] = useState([]);
   const [recipesDetails2, setRecipesDetails2] = useState([]);
 
+  const handleFavorite = () => {
+    setFavorite(!favorite);
+    const itensLocalStorage = localStorage.getItem('favoriteRecipes');
+    const objLocalStorage = {
+      id: 'strMeal' in recipesDetails[0]
+        ? recipesDetails[0].idMeal : recipesDetails[0].idDrink,
+      type: 'strMeal' in recipesDetails[0]
+        ? 'food' : 'drink',
+      nationality: 'strMeal' in recipesDetails[0]
+        ? recipesDetails[0].strArea : '',
+      category: recipesDetails[0].strCategory,
+      alcoholicOrNot: 'strMeal' in recipesDetails[0]
+        ? '' : recipesDetails[0].strAlcoholic,
+      name: 'strMeal' in recipesDetails[0]
+        ? recipesDetails[0].strMeal : recipesDetails[0].strDrink,
+      image: 'strMeal' in recipesDetails[0]
+        ? recipesDetails[0].strMealThumb : recipesDetails[0].strDrinkThumb,
+    };
+    if (itensLocalStorage === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([objLocalStorage]));
+    }
+    if (itensLocalStorage !== null) {
+      const array = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify([...array, objLocalStorage]));
+    }
+  };
+
   const contextValue = {
+    handleFavorite,
     recipesDetails2,
     setRecipesDetails2,
     recomendationMount,
