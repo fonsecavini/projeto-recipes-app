@@ -1,5 +1,15 @@
+body {
+
+  /* background: url(./images/claro_1_novo_pexels-valeria-boltneva-842571.jpg); */
+  height: 100%;
+  max-width: 100%;
+}
+
 .StartRecipe {
+  background-color: white;
   bottom: 0%;
+  color: #18a558;
+  font-weight: 700;
   position: fixed;
   width: 100%;
 }
@@ -16,38 +26,68 @@
   display: flex;
   overflow: hidden;
   overflow-x: scroll;
-  width: 360px;
+  width: 50%;
 }
 
 .stepDone {
   text-decoration: line-through;
 }
 
-.cards {
-  border-radius: 15%;
-  box-shadow: 1px;
-  left: 10px;
-  width: 180px;
+.container-details-food {
+  display: flex;
+  flex-direction: column;
 }
 
-.button {
-  background-color: rgb(248, 212, 218);
-  border-radius: 25%;
-  color: rgba(82, 73, 82, 0.205);
-  text-align: center;
+
+.container-datails-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.background {
-  background-image: url('https://i.pinimg.com/originals/fa/c5/da/fac5da92bfd44d02013076760996c6ff.jpgurl');
-  width: 100%;
+.details-image-recipe {
+  align-items: center;
+  border-color: white;
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 3px;
+  display: flex;
+  height: 300px;
+  margin: 20px;
+  text-shadow: rgba(17, 17, 26, 1) 0 4px 10px , rgba(17, 17, 26, 2) 0 8px 25px;
+  width: 80%;
 }
 
-.profileCss {
-  background-image: url('https://i.pinimg.com/736x/f5/b1/ea/f5b1ea665687e28370aaadeb8fedd768.jpg');
-  width: 100%;
+.title-recipes {
+  color: white;
+  font-weight: 700;
+  text-shadow: rgba(17, 17, 26, 1) 0 4px 10px , rgba(17, 17, 26, 2) 0 8px 25px;
 }
 
-.ingredientCss {background: url('https://img.itdg.com.br/tdg/images/blog/uploads/2016/10/4c917f573e70ee981c775fef2ab867b2-600x500.jpg?w=1200');
-  background-repeat: no-repeat;
-  width: 100%;
+.container-recipe-introduction {
+  color: white;
+  font-size: 15px;
+  text-align: justify;
+  text-shadow: rgba(17, 17, 26, 3) 0 4px 10px , rgba(17, 17, 26, 3) 0 8px 25px;
+  width: 80%;
+}
+
+.container-btn {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-favorite {
+  background-color: rgba(255, 255, 255, 0.515);
+  border-radius: 20%;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+.player {
+  display: flex;
+  height: 90%;
+  width: 90%;
 }

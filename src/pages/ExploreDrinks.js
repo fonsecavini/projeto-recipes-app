@@ -5,6 +5,7 @@ import Footer from '../components/BottomMenu';
 import ExploreSearch from '../components/ExploreSearch';
 import RecipesContext from '../context/RecipesContext';
 import '../css/details.css';
+import '../css/buttons.css';
 
 function ExploreDrinks() {
   const {
@@ -17,7 +18,7 @@ function ExploreDrinks() {
     if (location.pathname === '/explore/drinks') setSearchEnable(false);
   });
   return (
-    <div>
+    <div className="page-div">
       <Header title="Explore Drinks" />
       <ExploreSearch />
       <Footer />

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import ExploreSearch from '../components/ExploreSearch';
 import RecipesContext from '../context/RecipesContext';
 import '../css/details.css';
+import '../css/buttons.css';
 
 function ExploreFoods() {
   const {
@@ -17,7 +18,7 @@ function ExploreFoods() {
     if (location.pathname === '/explore/foods') setSearchEnable(false);
   });
   return (
-    <div>
+    <div className="page-div">
       <Header title="Explore Foods" />
       <ExploreSearch />
       <Footer />

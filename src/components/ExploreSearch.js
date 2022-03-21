@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { fetchSurpriseMeal, fetchSurpriseDrink } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
 import '../css/details.css';
+import '../css/buttons.css';
 
 function ExploreSearch() {
   const location = useLocation();
@@ -40,8 +41,9 @@ function ExploreSearch() {
   };
 
   return (
-    <div>
+    <div className="explore-box">
       <button
+        className="explore-btn"
         type="button"
         onClick={ handleClick }
         data-testid="explore-by-ingredient"
@@ -51,6 +53,7 @@ function ExploreSearch() {
       </button>
       { location.pathname === '/explore/foods' && (
         <button
+          className="explore-btn"
           type="button"
           onClick={ handleClick }
           data-testid="explore-by-nationality"
@@ -60,6 +63,7 @@ function ExploreSearch() {
         </button>
       )}
       <button
+        className="explore-btn"
         type="button"
         onClick={ handleSurprise }
         data-testid="explore-surprise"

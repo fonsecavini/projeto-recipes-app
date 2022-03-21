@@ -62,35 +62,50 @@ function DetailInfo() {
     <div>
       {
         recipesDetails.length > 0 && (
-          <div>
+          <div className="container-datails-info">
             {/* imagem da receita */}
             <img
+              className="details-image-recipe"
               data-testid="recipe-photo"
               src={ recipesDetails[0][image] }
               alt="recipe"
             />
             {/* titulo da receita  */}
-            <h1 data-testid="recipe-title">
+            <h1 data-testid="recipe-title" className="title-recipes">
               {recipesDetails[0][title] }
             </h1>
-            {/* botao de compartilhar */}
-            <ShareButton />
-            {/* botao de favoritar */}
-            <input
-              type="image"
-              data-testid="favorite-btn"
-              onClick={ handleFavorite }
-              value={ recipesDetails[0] }
-              src={ favorite ? blackHeartIcon : whiteHeartIcon }
-              alt={ favorite ? 'blackHeartIcon' : 'whiteHeartIcon' }
-            />
+            <div className="container-btn">
+              {/* botao de compartilhar */}
+              <ShareButton />
+              {/* botao de favoritar */}
+              <div>
+                <input
+                  className="btn-favorite"
+                  type="image"
+                  data-testid="favorite-btn"
+                  onClick={ handleFavorite }
+                  value={ recipesDetails[0] }
+                  src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                  alt={ favorite ? 'blackHeartIcon' : 'whiteHeartIcon' }
+                />
+              </div>
+            </div>
             {/* texto da categoria */}
             { location.pathname.includes('foods')
-            && <p data-testid="recipe-category">{recipesDetails[0].strCategory}</p>}
+            && (
+              <p
+                data-testid="recipe-category"
+                className="container-recipe-introduction"
+              >
+                {recipesDetails[0].strCategory}
+              </p>)}
 
             { location.pathname.includes('drinks')
-            && <p data-testid="recipe-category">{recipesDetails[0].strAlcoholic}</p>}
-            <p data-testid="instructions">
+            && (
+              <p data-testid="recipe-category" className="container-recipe-introduction">
+                {recipesDetails[0].strAlcoholic}
+              </p>)}
+            <p data-testid="instructions" className="container-recipe-introduction">
               { recipesDetails[0].strInstructions}
             </p>
           </div>

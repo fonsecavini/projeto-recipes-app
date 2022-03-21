@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import { fetchRecommendationsMeals } from '../services/fetchApi';
 import FoodCard from './FoodCard';
-import '../css/details.css';
+import '../css/card.css';
 
 function FoodList() {
   const { recipes,
@@ -38,7 +38,7 @@ function FoodList() {
   });
 
   return (
-    <div>
+    <div className="container-list">
       { recipes && recipes.slice(0, TWELVE).map((meals, index) => (
         <FoodCard
           key={ meals.idMeal }

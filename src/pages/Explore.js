@@ -5,6 +5,7 @@ import Footer from '../components/BottomMenu';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import '../css/details.css';
+import '../css/buttons.css';
 
 function Explore(props) {
   const {
@@ -28,24 +29,28 @@ function Explore(props) {
   };
 
   return (
-    <div>
+    <div className="page-div">
       <Header title="Explore" />
-      <button
-        type="button"
-        onClick={ handleClick }
-        data-testid="explore-foods"
-        value="Foods"
-      >
-        Explore Foods
-      </button>
-      <button
-        type="button"
-        onClick={ handleClick }
-        data-testid="explore-drinks"
-        value="Drinks"
-      >
-        Explore Drinks
-      </button>
+      <div className="explore-box">
+        <button
+          className="explore-btn"
+          type="button"
+          onClick={ handleClick }
+          data-testid="explore-foods"
+          value="Foods"
+        >
+          Explore Foods
+        </button>
+        <button
+          className="explore-btn"
+          type="button"
+          onClick={ handleClick }
+          data-testid="explore-drinks"
+          value="Drinks"
+        >
+          Explore Drinks
+        </button>
+      </div>
       <Footer />
     </div>
   );

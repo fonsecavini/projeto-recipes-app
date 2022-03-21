@@ -72,12 +72,13 @@ function ExploreByNationalities() {
           recipesArea.slice(0, TWELVE).map((recipes, index) => (
             <Link
               key={ recipes.strMeal }
-              className="card"
+              className="cards"
               to={ `/foods/${recipes.idMeal}` }
               value={ recipes.strMeal }
               data-testid={ `${index}-recipe-card` }
             >
               <img
+                className="card-img"
                 id={ recipes.idMeal }
                 src={ recipes.strMealThumb }
                 alt="FoodsExplore"

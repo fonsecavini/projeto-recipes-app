@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import recipesContext from '../context/RecipesContext';
 import { fetchListCategoryDrink, fetchDrinksByCategory } from '../services/fetchApi';
 import '../css/details.css';
+import '../css/buttons.css';
 
 function DrinksCategories() {
   const { drinkCategories,
@@ -36,9 +37,10 @@ function DrinksCategories() {
   }
 
   return (
-    <div>
+    <div className="category-box">
       { drinkCategories && drinkCategories.slice(0, FIVE).map(({ strCategory }) => (
         <button
+          className="category-button"
           key={ strCategory }
           type="button"
           data-testid={ `${strCategory}-category-filter` }
@@ -49,6 +51,7 @@ function DrinksCategories() {
         </button>
       )) }
       <button
+        className="category-button"
         type="button"
         data-testid="All-category-filter"
         value="All"

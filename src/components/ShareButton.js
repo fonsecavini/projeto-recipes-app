@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import recipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
+import '../css/details.css';
 
 function ShareButton() {
   const { recipesDetails } = useContext(recipesContext);
@@ -25,6 +26,7 @@ function ShareButton() {
   return (
     <div>
       <input
+        className="btn-favorite"
         type="image"
         data-testid="share-btn"
         src={ shareIcon }

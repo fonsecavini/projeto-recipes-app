@@ -7,8 +7,8 @@ import '../css/details.css';
 function Player(props) {
   const { url } = props;
   const opts = {
-    height: '360',
-    width: '640',
+    height: '180',
+    width: '360',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
@@ -22,7 +22,7 @@ function Player(props) {
   };
 
   return (
-    <div data-testid="video">
+    <div data-testid="video" className="player">
       <YouTube
         videoId={ urlId }
         opts={ opts }

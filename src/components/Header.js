@@ -5,7 +5,7 @@ import SearchIcon from '../images/searchIcon.svg';
 import ProfileIcon from '../images/profileIcon.svg';
 import RecipesContext from '../context/RecipesContext';
 import SearchBar from './SearchBar';
-import '../css/details.css';
+import '../css/header.css';
 
 function Header(props) {
   // const [searchEnable, setSearchEnable] = useState(true);
@@ -25,7 +25,7 @@ function Header(props) {
   // };
 
   return (
-    <div>
+    <div className="container-header">
       {/* <input
         type="image"
         data-testid="profile-top-btn"
@@ -36,6 +36,7 @@ function Header(props) {
       <Link
         to="/profile"
         onClick={ () => setSearchEnable(false) }
+        className="header-btn-search"
       >
         <img src={ ProfileIcon } data-testid="profile-top-btn" alt="profile icon" />
       </Link>
@@ -51,7 +52,7 @@ function Header(props) {
         />
       </button> */}
 
-      <h2 data-testid="page-title">{ title }</h2>
+      <h2 data-testid="page-title" className="header-title">{ title }</h2>
       {
         searchEnable
         && (
@@ -60,6 +61,7 @@ function Header(props) {
             alt="searchicon"
             src={ SearchIcon }
             data-testid="search-top-btn"
+            className="header-btn-profile"
             onClick={ () => setEnableSearchBar(!enableSearchBar) }
           />
         )

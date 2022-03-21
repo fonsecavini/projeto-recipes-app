@@ -46,12 +46,14 @@ const ExploreByIngredients = () => {
       { location.pathname === drinksLocation ? (
         ingredients.slice(0, TWELVE).map((ingredient, index) => (
           <button
+            className="cards"
             key={ ingredient.strIngredient1 }
             type="button"
             onClick={ handleClick }
             data-testid={ `${index}-ingredient-card` }
           >
             <img
+              className="card-img"
               data-testid={ `${index}-card-img` }
               src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
               alt="DrinksIngredients"
@@ -68,6 +70,7 @@ const ExploreByIngredients = () => {
         ))) : (
         ingredients.slice(0, TWELVE).map((ingredient, index) => (
           <button
+            className="cards"
             key={ ingredient.strIngredient }
             type="button"
             onClick={ handleClick }
@@ -75,6 +78,7 @@ const ExploreByIngredients = () => {
           >
             <div>
               <img
+                className="card-img"
                 id={ ingredient.strIngredient }
                 data-testid={ `${index}-card-img` }
                 src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }

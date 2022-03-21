@@ -51,6 +51,7 @@ function IngredientsList() {
         {
           ingredient.map((e, index) => (
             <li
+              className="container-recipe-introduction"
               key={ e }
               data-testid={
                 `${index}-ingredient-name-and-measure`

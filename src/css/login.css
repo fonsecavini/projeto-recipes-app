@@ -1,0 +1,105 @@
+body {
+  background-attachment: fixed;
+  background-image: url('./images/escuro_1_novo_pexels-valeria-boltneva-842571.jpg');
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.container-login {
+  align-items: center;
+  background-color: #ff8f62;
+  border-radius: 24px;
+  box-shadow: rgba(17, 17, 26, 2) 0 4px 16px , rgba(17, 17, 26, 1.5) 0 8px 32px;
+  display: flex;
+  flex-direction: column;
+  margin: 25% auto;
+  padding: 10px;
+  width: 60%;
+}
+
+/* CONTAINER NAME APP */
+.container-name {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.container-name p {
+  color: white;
+  font-family: Open Sans , sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 0;
+  padding: 0;
+  text-shadow: rgba(17, 17, 26, 0.2) 0 4px 10px , rgba(17, 17, 26, 0.5) 0 8px 25px;
+  text-transform: uppercase;
+}
+
+/* CONTAINER INPUTS */
+.container-email p, .container-password p {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.container-email input, .container-password input {
+  border: 1px solid #5f5f5e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* CONTAINER BUTTON */
+.container-btn {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+
+}
+
+.container-btn button {
+  background-color: #18a558;
+  border: none;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 5px;
+  padding: 6px 25px;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transition: all 250ms;
+  user-select: none;
+  vertical-align: baseline;
+  width: 100%;
+}
+
+.container-btn button:hover, .container-btn button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.container-btn button:hover {
+  transform: translateY(-1px);
+}
+
+.container-btn button:active {
+  transform: translateY(0);
+}
+
+/* @media screen and (min-width: 420px) and (max-width: 920px) {}; */
+
+@font-face {
+  font-family: Open Sans;
+  src: url('./images/American\ Signs.otf') format('truetype');
+}
+
+@media screen and ( max-width : 360px ) {
+
+  /* BODY LOGIN */
+  .container-login {
+    margin: 25% auto;
+    width: 80%;
+  }
+}

@@ -69,7 +69,7 @@ function Detail() {
   }, []);
 
   return (
-    <div>
+    <div className="container-details-food">
       {
         recipesDetails.length > 0 && (
           <div>

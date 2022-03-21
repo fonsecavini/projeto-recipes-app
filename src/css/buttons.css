@@ -1,0 +1,41 @@
+.category-button {
+  background-color: white;
+  color: #18a558;
+  font-weight: 700;
+}
+
+.category-button:hover {
+  background-color: #18a558;
+  color: white;
+}
+
+.category-box {
+  display: flex;
+}
+
+.explore-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.explore-btn {
+  background-color: #18a558;
+  color: white;
+  font-weight: 700;
+  margin: 10px;
+  width: 75%;
+}
+
+.explore-btn:hover {
+  background-color: white;
+  color: #18a558;
+  font-weight: 700;
+}
+
+.page-div {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { fetchMealsDetails } from '../services/fetchApi';
 import recipesContext from '../context/RecipesContext';
-import '../css/details.css';
+import '../css/card.css';
 
 function FoodCard(props) {
   const { dataMeals, index, strMealThumb, dataTestid } = props;
@@ -28,6 +28,7 @@ function FoodCard(props) {
         <div data-testid={ dataTestid }>
           {dataMeals.strMeal}
           <img
+            className="cards-img"
             data-testid={ `${index}-card-img` }
             src={ strMealThumb }
             alt="Meal"
